@@ -60,7 +60,7 @@ Although your friend has an excellent understanding of property prices in her ow
 **Hypothesis 1:**
 
 * Assumption: Bigger houses, measured by the combined area of all floors, tend to have higher sale prices compared to smaller houses.
-* Validation: To validate this assumption, we will conduct a correlation study between the total area of the house and its sale price. We will also use visualizations like scatter plots to explore this relationship.
+* Validation: To validate this assumption, a correlation study will be conducted between the total area of the house and its sale price. Additionally, visualizations like scatter plots will be used to explore this relationship.
 
 * Result:
 The scatter plots and correlation analysis show a positive relationship between the total area of the house and its sale price, confirming the hypothesis that bigger houses tend to have higher sale prices.
@@ -68,14 +68,17 @@ The scatter plots and correlation analysis show a positive relationship between 
 **Hypothesis 2:**
 
 * Assumption: Homes with higher quality ratings ('OverallQual') tend to sell for higher prices compared to homes with lower quality ratings.
-Validation: We will validate this hypothesis by conducting a correlation analysis and creating scatter plots to visualize the relationship between 'OverallQual' and 'SalePrice' to better understand how quality affects the price.
+* Validation: This hypothesis will be validated by conducting a correlation analysis and creating scatter plots to visualize the relationship between 'OverallQual' and 'SalePrice' to better understand how quality affects the price.
 
 * Result: The scatter plot and correlation analysis show a strong positive link between OverallQual and SalePrice. With a correlation of 0.79, higher quality homes tend to sell for more. This confirms that home quality affects its sale price.
 
 **Hypothesis 3:**
 
 * Houses with larger garage areas ('GarageArea') will sell for higher prices because buyers value bigger garages.
-Validation: To confirm this hypothesis, we will perform a correlation analysis to examine the relationship between garage size and sale price. We will also create scatter plots to visualize how the garage size impacts the value of the house.
+
+* Validation: To confirm this hypothesis, a correlation analysis will be performed to examine the relationship between garage size and sale price. Scatter plots will also be created to visualize how the garage size impacts the value of the house.
+
+* Result: The scatter plot and correlation analysis show a positive relationship between 'GarageArea' and 'SalePrice'. This confirms the hypothesis that houses with bigger garages tend to sell for higher prices.
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
