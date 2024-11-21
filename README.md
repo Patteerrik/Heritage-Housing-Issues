@@ -67,13 +67,15 @@ The scatter plots and correlation analysis show a positive relationship between 
 
 **Hypothesis 2:**
 
-* Assumption: Homes with high overall quality ratings ('OverallQual') will tend to sell for higher prices compared to those with lower ratings.
-* Validation: Based on the correlation matrix, 'OverallQual' shows a strong positive correlation with 'SalePrice' (0.79). We will validate this hypothesis by conducting a correlation analysis and visualizing the relationship between 'OverallQual' and 'SalePrice' using scatter plots to further understand how quality affects price.
+* Assumption: Homes with higher quality ratings ('OverallQual') tend to sell for higher prices compared to homes with lower quality ratings.
+Validation: We will validate this hypothesis by conducting a correlation analysis and creating scatter plots to visualize the relationship between 'OverallQual' and 'SalePrice' to better understand how quality affects the price.
+
+* Result: The scatter plot and correlation analysis show a strong positive link between OverallQual and SalePrice. With a correlation of 0.79, higher quality homes tend to sell for more. This confirms that home quality affects its sale price.
 
 **Hypothesis 3:**
 
-* Assumption: Houses with larger garage areas ('GarageArea') will have higher sale prices, indicating that buyers value larger garages.
-* Validation: The correlation between 'GarageArea' and 'SalePrice' is also quite strong (0.62). To validate this hypothesis, we will analyze the relationship between garage size and sale price by creating scatter plots and calculating correlation coefficients to confirm the impact of garage size on house value.
+* Houses with larger garage areas ('GarageArea') will sell for higher prices because buyers value bigger garages.
+Validation: To confirm this hypothesis, we will perform a correlation analysis to examine the relationship between garage size and sale price. We will also create scatter plots to visualize how the garage size impacts the value of the house.
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
