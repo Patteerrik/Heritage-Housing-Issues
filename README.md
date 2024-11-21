@@ -62,6 +62,9 @@ Although your friend has an excellent understanding of property prices in her ow
 * Assumption: Bigger houses, measured by the combined area of all floors, tend to have higher sale prices compared to smaller houses.
 * Validation: To validate this assumption, we will conduct a correlation study between the total area of the house and its sale price. We will also use visualizations like scatter plots to explore this relationship.
 
+* Result:
+The scatter plots and correlation analysis show a positive relationship between the total area of the house and its sale price, confirming the hypothesis that bigger houses tend to have higher sale prices.
+
 **Hypothesis 2:**
 
 * Assumption: Homes with high overall quality ratings ('OverallQual') will tend to sell for higher prices compared to those with lower ratings.
