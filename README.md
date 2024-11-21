@@ -1,10 +1,10 @@
 # Heritage Housing Issues
 
-# Table of Contents
+## Table of Contents
 - [Dataset Content](#dataset-content)
 - [Business Requirements](#business-requirements)
-- [Hypothesis and How to Validate](#hypothesis-and-how-to-validate)
-- [Rationale to Map Business Requirements to Data Visualizations and ML Tasks](#rationale-to-map-business-requirements-to-data-visualizations-and-ml-tasks)
+- [Hypothesis and Validation](#hypothesis-and-validation)
+- [The Rationale to Map Business Requirements to Data Visualizations and ML Tasks](#the-rationale-to-map-business-requirements-to-data-visualizations-and-ml-tasks)
 - [ML Business Case](#ml-business-case)
 - [Dashboard Design](#dashboard-design)
 - [Unfixed Bugs](#unfixed-bugs)
@@ -12,6 +12,7 @@
   - [Heroku](#heroku)
 - [Main Data Analysis and Machine Learning Libraries](#main-data-analysis-and-machine-learning-libraries)
 - [Credits](#credits)
+
 
 ## Dataset Content
 
@@ -56,16 +57,30 @@ Although your friend has an excellent understanding of property prices in her ow
 
 ## Hypothesis and validation
 
-* List here your project hypothesis(es) and how you envision validating it (them).
+**Hypothesis 1:**
+
+* Assumption: Bigger houses, measured by the combined area of all floors, tend to have higher sale prices compared to smaller houses.
+* Validation: To validate this assumption, we will conduct a correlation study between the total area of the house and its sale price. We will also use visualizations like scatter plots to explore this relationship.
+
+**Hypothesis 2:**
+
+* Assumption: Homes with high overall quality ratings ('OverallQual') will tend to sell for higher prices compared to those with lower ratings.
+* Validation: Based on the correlation matrix, 'OverallQual' shows a strong positive correlation with 'SalePrice' (0.79). We will validate this hypothesis by conducting a correlation analysis and visualizing the relationship between 'OverallQual' and 'SalePrice' using scatter plots to further understand how quality affects price.
+
+**Hypothesis 3:**
+
+* Assumption: Houses with larger garage areas ('GarageArea') will have higher sale prices, indicating that buyers value larger garages.
+* Validation: The correlation between 'GarageArea' and 'SalePrice' is also quite strong (0.62). To validate this hypothesis, we will analyze the relationship between garage size and sale price by creating scatter plots and calculating correlation coefficients to confirm the impact of garage size on house value.
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
-* Business Requirement 1
+* **Business Requirement 1**
 
   * To understand how different house attributes relate to the sale price, we will perform a correlation study or use a Predictive Power Score (PPS) analysis.
   * This will help us identify the variables most significantly impacting the sale price.
   * We will visualize these variables against the sale price to derive insights.
-* Business Requirement 2
+
+* **Business Requirement 2**
 
   * To predict the total sale price of the four inherited houses, we will create a Machine Learning (ML) model that can map the relationships between house features and the sale price.
   * We can use either traditional ML models or Neural Networks.
@@ -73,24 +88,40 @@ Although your friend has an excellent understanding of property prices in her ow
 
 ## ML Business Case
 
-The client wants to understand what affects house prices and predict the prices of specific houses, including four inherited houses. To achieve this, we need to use a machine learning (ML) model.
+The client wants to understand what affects house prices and predict the prices of specific houses, including four inherited houses. To achieve this, we need to use a machine learning model.
 
 The ML task is to build a model that can predict house prices based on different features of the house, like the area, number of rooms, year built, etc. Since the price is a number, a regression model is a good choice.
 
 Key Points for the ML Model:
-* Inputs: Information about the house, such as the number of rooms, lot size, garage area, and more.
-* Output: The predicted price of the house.
-* Model Type: We will use a regression model, like Random Forest, Linear Regression, or Neural Networks, to find the relationship between house features and sale prices.
-* Success Criteria: The client considers the model successful if it has an R² score of at least 0.75. This means the model should be able to explain at least 75% of the changes in house prices.
-* Use Cases:
+* **Inputs:** Information about the house, such as the number of rooms, lot size, garage area, and more.
+* **Output:** The predicted price of the house.
+* **Model Type:** We will use a regression model, like Random Forest, Linear Regression, or Neural Networks, to find the relationship between house features and sale prices.
+* **Success Criteria:** The client considers the model successful if it has an R² score of at least 0.75. This means the model should be able to explain at least 75% of the changes in house prices.
+* **Use Cases:**
   * Show how different house features are related to sale prices.
   * Predict the sale prices of the four inherited houses and other houses in Ames, Iowa.
 The goal is to give the client a reliable tool to estimate house prices, helping them get the best value for their inherited houses and make good decisions for other properties.
 
+## Epics and User Stories
+
+* **Epic 1:** Information Gathering and Data Collection
+  - User Story: Collect relevant data and information for analysis.
+* **Epic 2:** Data Visualization, Cleaning, and Preparation
+  - User Story: Visualize the data, identify trends, and clean the dataset.
+* **Epic 3:** Model Training, Optimization, and Validation
+  - User Story: Train the model, tune hyperparameters, and validate model performance.
+* **Epic 4:** Planning, Design, and Development of Dashboard
+  - User Story: Design and develop an interactive dashboard to visualize insights.
+* **Epic 5:** Dashboard Deployment and Release
+  - User Story: Deploy the dashboard to Heroku and make it publicly accessible.
 
 ## Dashboard Design
 
-1. The first page explains the project dataset and outlines the business requirements.
+1. **Summary Page:** Provides an overview of the dataset and states the business requirements.
+2. **Feature Correlation Page:** Lists findings related to features most correlated with sales price.
+3. **Inherited Houses Page:** Displays the four inherited houses and their respective predicted sale prices, including the summed sale price.
+4. **Hypotheses Page:** Describes the hypotheses and how they were validated.
+5. **Technical Page:** Shows the model's performance and pipeline steps.
 
 ## Unfixed Bugs
 
@@ -113,24 +144,29 @@ The goal is to give the client a reliable tool to estimate house prices, helping
 ## Main Data Analysis and Machine Learning Libraries
 
 ### Pandas
-* Usage: Pandas was used for data manipulation, cleaning, and transformation. For example, we used Pandas to load the housing dataset, check for missing values, drop duplicates, and convert categorical features for analysis.
+* **Usage:** Pandas was used for data manipulation, cleaning, and transformation. For example, Pandas was used to load the housing dataset, check for missing values, drop duplicates, and convert categorical features for analysis.
+
 ### NumPy
-* Usage: NumPy was used to handle numerical operations efficiently, such as converting data types and performing operations on arrays.
-### Scikit-learn (sklearn)
-* Usage: This library was essential for building and evaluating the machine learning model. We used:
-  * Train-Test Split: To split our dataset into training and testing sets.
-  * RandomForestRegressor: For predicting house prices based on the features provided.
-  * StandardScaler: To scale numerical features before training the model.
-  * Pipeline: To create a pipeline that standardizes the data and then applies the machine learning model.
-  * Evaluation Metrics: Metrics like Mean Squared Error (MSE) and R² were used to evaluate the model's performance.
+* **Usage:** NumPy was used to handle numerical operations efficiently, such as converting data types and performing operations on arrays.
+
+### Scikit-learn
+* **Usage:** This library was essential for building and evaluating the machine learning model.
+  * **Train-Test Split:** To split dataset into training and testing sets.
+  * **RandomForestRegressor:** For predicting house prices based on the features provided.
+  * **StandardScaler:** To scale numerical features before training the model.
+  * **Pipeline:** To create a pipeline that standardizes the data and then applies the machine learning model.
+  * **Evaluation Metrics:** Metrics like Mean Squared Error (MSE) and R² were used to evaluate the model's performance.
+
 ### Matplotlib and Seaborn
-* Usage: These libraries were used for data visualization.
-  * Matplotlib: We used Matplotlib to create different plots to understand the data, including scatter plots and line plots.
-  * Seaborn: We used Seaborn to create correlation heatmaps and histograms to better understand the relationships between features.
+* **Usage:** These libraries were used for data visualization.
+  * **Matplotlib:** Was used to create different plots to understand the data, including scatter plots and line plots.
+  * **Seaborn:** Was used to create correlation heatmaps and histograms to better understand the relationships between features.
+
 ### Feature-engine
-* Usage: We used the SmartCorrelatedSelection feature from the Feature-engine library to select relevant features and reduce multicollinearity among predictors.
+* **Usage**: Using `SmartCorrelatedSelection` from the Feature-engine library to select relevant features and reduce multicollinearity among predictors.
+
 ### Streamlit (planned)
-* Usage: We plan to use Streamlit for developing the project dashboard, which will allow users to interact with the model and visualize the results.
+* **Usage**: Developing the project dashboard, which will allow users to interact with the model and visualize the results.
 
 ### Content
 
