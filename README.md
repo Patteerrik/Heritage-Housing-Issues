@@ -1,46 +1,17 @@
-# ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Heritage Housing Issues
 
-## Template Instructions
-
-Welcome,
-
-This is the Code Institute student template for the Heritage Housing project option in Predictive Analytics. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
-
-You can safely delete the Template Instructions section of this README.md file,  and modify the remaining paragraphs for your own project. Please do read the Template Instructions at least once, though! It contains some important information about the IDE and the extensions we use.
-
-## How to use this repo
-
-1. Use this template to create your GitHub project repo
-
-2. Log into the cloud-based IDE with your GitHub account.
-
-3. On your Dashboard, click on the Create button
-
-4. Paste in the URL you copied from GitHub earlier
-
-5. Click Create
-
-6. Wait for the workspace to open. This can take a few minutes.
-
-7. Open a new terminal and `pip3 install -r requirements.txt`
-
-11. Open the jupyter_notebooks directory and click on the notebook you want to open.
-
-12. Click the kernel button and choose Python Environments.
-
-Note that the kernel says Python 3.8.18 as it inherits from the workspace so it will be Python-3.8.18 as installed by our template. To confirm this you can use `! python --version` in a notebook code cell.
-
-## Cloud IDE Reminders
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In your Cloud IDE, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with *Regenerate API Key*.
+# Table of Contents
+- [Dataset Content](#dataset-content)
+- [Business Requirements](#business-requirements)
+- [Hypothesis and How to Validate](#hypothesis-and-how-to-validate)
+- [Rationale to Map Business Requirements to Data Visualizations and ML Tasks](#rationale-to-map-business-requirements-to-data-visualizations-and-ml-tasks)
+- [ML Business Case](#ml-business-case)
+- [Dashboard Design](#dashboard-design)
+- [Unfixed Bugs](#unfixed-bugs)
+- [Deployment](#deployment)
+  - [Heroku](#heroku)
+- [Main Data Analysis and Machine Learning Libraries](#main-data-analysis-and-machine-learning-libraries)
+- [Credits](#credits)
 
 ## Dataset Content
 
@@ -83,26 +54,46 @@ Although your friend has an excellent understanding of property prices in her ow
 * 1 - The client is interested in discovering how the house attributes correlate with the sale price. Therefore, the client expects data visualisations of the correlated variables against the sale price to show that.
 * 2 - The client is interested in predicting the house sale price from her four inherited houses and any other house in Ames, Iowa.
 
-## Hypothesis and how to validate?
+## Hypothesis and validation
 
 * List here your project hypothesis(es) and how you envision validating it (them).
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
-* List your business requirements and a rationale to map them to the Data Visualisations and ML tasks.
+* Business Requirement 1
+
+  * To understand how different house attributes relate to the sale price, we will perform a correlation study or use a Predictive Power Score (PPS) analysis.
+  * This will help us identify the variables most significantly impacting the sale price.
+  * We will visualize these variables against the sale price to derive insights.
+* Business Requirement 2
+
+  * To predict the total sale price of the four inherited houses, we will create a Machine Learning (ML) model that can map the relationships between house features and the sale price.
+  * We can use either traditional ML models or Neural Networks.
+  * To enhance the model's performance, we will conduct hyperparameter optimization using tools like Scikit-Learn.
 
 ## ML Business Case
 
-* In the previous bullet, you potentially visualised an ML task to answer a business requirement. You should frame the business case using the method we covered in the course.
+The client wants to understand what affects house prices and predict the prices of specific houses, including four inherited houses. To achieve this, we need to use a machine learning (ML) model.
+
+The ML task is to build a model that can predict house prices based on different features of the house, like the area, number of rooms, year built, etc. Since the price is a number, a regression model is a good choice.
+
+Key Points for the ML Model:
+* Inputs: Information about the house, such as the number of rooms, lot size, garage area, and more.
+* Output: The predicted price of the house.
+* Model Type: We will use a regression model, like Random Forest, Linear Regression, or Neural Networks, to find the relationship between house features and sale prices.
+* Success Criteria: The client considers the model successful if it has an R² score of at least 0.75. This means the model should be able to explain at least 75% of the changes in house prices.
+* Use Cases:
+  * Show how different house features are related to sale prices.
+  * Predict the sale prices of the four inherited houses and other houses in Ames, Iowa.
+The goal is to give the client a reliable tool to estimate house prices, helping them get the best value for their inherited houses and make good decisions for other properties.
+
 
 ## Dashboard Design
 
-* List all dashboard pages and their content, either blocks of information or widgets, like buttons, checkboxes, images, or any other items that your dashboard library supports.
-* Eventually, during the project development, you may revisit your dashboard plan to update a given feature (for example, at the beginning of the project you were confident you would use a given plot to display an insight but eventually you needed to use another plot type)
+1. The first page explains the project dataset and outlines the business requirements.
 
 ## Unfixed Bugs
 
-* You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not valid reason to leave bugs unfixed.
 
 ## Deployment
 
@@ -121,26 +112,26 @@ Although your friend has an excellent understanding of property prices in her ow
 
 ## Main Data Analysis and Machine Learning Libraries
 
-* Here you should list the libraries you used in the project and provide example(s) of how you used these libraries.
-
-## Credits
-
-* In this section, you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism.
-* You can break the credits section up into Content and Media, depending on what you have included in your project.
+### Pandas
+* Usage: Pandas was used for data manipulation, cleaning, and transformation. For example, we used Pandas to load the housing dataset, check for missing values, drop duplicates, and convert categorical features for analysis.
+### NumPy
+* Usage: NumPy was used to handle numerical operations efficiently, such as converting data types and performing operations on arrays.
+### Scikit-learn (sklearn)
+* Usage: This library was essential for building and evaluating the machine learning model. We used:
+  * Train-Test Split: To split our dataset into training and testing sets.
+  * RandomForestRegressor: For predicting house prices based on the features provided.
+  * StandardScaler: To scale numerical features before training the model.
+  * Pipeline: To create a pipeline that standardizes the data and then applies the machine learning model.
+  * Evaluation Metrics: Metrics like Mean Squared Error (MSE) and R² were used to evaluate the model's performance.
+### Matplotlib and Seaborn
+* Usage: These libraries were used for data visualization.
+  * Matplotlib: We used Matplotlib to create different plots to understand the data, including scatter plots and line plots.
+  * Seaborn: We used Seaborn to create correlation heatmaps and histograms to better understand the relationships between features.
+### Feature-engine
+* Usage: We used the SmartCorrelatedSelection feature from the Feature-engine library to select relevant features and reduce multicollinearity among predictors.
+### Streamlit (planned)
+* Usage: We plan to use Streamlit for developing the project dashboard, which will allow users to interact with the model and visualize the results.
 
 ### Content
 
-* The text for the Home page was taken from Wikipedia Article A
-* Instructions on how to implement form validation on the Sign-Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-* The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
-
-### Media
-
-* The photos used on the home and sign-up page are from This Open Source site
-* The images used for the gallery page were taken from this other open-source site
-
-## Acknowledgements (optional)
-
-
-* In case you would like to thank the people that provided support through this project.
-
+## Credits
