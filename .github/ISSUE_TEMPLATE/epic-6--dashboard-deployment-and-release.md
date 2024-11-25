@@ -1,5 +1,5 @@
 ---
-name: 'Epic 5: Dashboard Deployment and Release'
+name: 'Epic 6: Dashboard Deployment and Release'
 about: Deploy the Streamlit dashboard to make it available online.
 title: ''
 labels: documentation
