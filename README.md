@@ -74,7 +74,7 @@ The scatter plots and correlation analysis show a positive relationship between 
 
 **Hypothesis 3:**
 
-* Houses with larger garage areas ('GarageArea') will sell for higher prices because buyers value bigger garages.
+* Assumption: Houses with larger garage areas ('GarageArea') will sell for higher prices because buyers value bigger garages.
 
 * Validation: To confirm this hypothesis, a correlation analysis will be performed to examine the relationship between garage size and sale price. Scatter plots will also be created to visualize how the garage size impacts the value of the house.
 
@@ -84,31 +84,33 @@ The scatter plots and correlation analysis show a positive relationship between 
 
 * **Business Requirement 1**
 
-  * To understand how different house attributes relate to the sale price, we will perform a correlation study or use a Predictive Power Score (PPS) analysis.
-  * This will help us identify the variables most significantly impacting the sale price.
-  * We will visualize these variables against the sale price to derive insights.
+  * To understand how different house attributes relate to the sale price, a correlation study or Predictive Power Score (PPS) analysis will be performed.
+  * This will help identify the variables most significantly impacting the sale price.
+  * These variables will be visualized against the sale price to derive insights.
 
 * **Business Requirement 2**
 
-  * To predict the total sale price of the four inherited houses, we will create a Machine Learning (ML) model that can map the relationships between house features and the sale price.
-  * We can use either traditional ML models or Neural Networks.
-  * To enhance the model's performance, we will conduct hyperparameter optimization using tools like Scikit-Learn.
+  * To predict the total sale price of the four inherited houses, a Machine Learning (ML) model will be created to map the relationships between house features and the sale price.
+  * Either traditional ML models or Neural Networks can be used.
+  * To enhance the model's performance, hyperparameter optimization will be conducted using tools like Scikit-Learn.
 
 ## ML Business Case
 
-The client wants to understand what affects house prices and predict the prices of specific houses, including four inherited houses. To achieve this, we need to use a machine learning model.
+The client wants to understand what affects house prices and predict the prices of specific houses, including four inherited houses. To achieve this, a machine learning model will be used.
 
 The ML task is to build a model that can predict house prices based on different features of the house, like the area, number of rooms, year built, etc. Since the price is a number, a regression model is a good choice.
 
 Key Points for the ML Model:
 * **Inputs:** Information about the house, such as the number of rooms, lot size, garage area, and more.
 * **Output:** The predicted price of the house.
-* **Model Type:** We will use a regression model, like Random Forest, Linear Regression, or Neural Networks, to find the relationship between house features and sale prices.
+* **Model Type:** A regression model, such as Random Forest, Linear Regression, or Neural Networks, will be used to find the relationship between house features and sale prices.
 * **Success Criteria:** The client considers the model successful if it has an R² score of at least 0.75. This means the model should be able to explain at least 75% of the changes in house prices.
 * **Use Cases:**
   * Show how different house features are related to sale prices.
   * Predict the sale prices of the four inherited houses and other houses in Ames, Iowa.
 The goal is to give the client a reliable tool to estimate house prices, helping them get the best value for their inherited houses and make good decisions for other properties.
+
+## CRISP-DM
 
 ## Epics and User Stories
 
