@@ -2,19 +2,21 @@ import streamlit as st
 from app_pages.multipage import MultiPage
 
 # load pages scripts
-from app_pages.page_summary import page_summary_body
-from app_pages.page_feature_correlation import page_feature_correlation_body
-from app_pages.page_predict_price import page_predict_price_body
-from app_pages.page_ml_model import page_ml_model_body
+from app_pages.data_summary import data_summary_body
+from app_pages.feature_correlation import feature_correlation_body
+from app_pages.predict_sale_price import predict_sale_price_body
+from app_pages.model_performance import model_performance_body
+from app_pages.hypotheses_validation import hypotheses_validation_body
 
 # Create an instance of the app
 app = MultiPage(app_name="House Prices Analysis")
 
 # Add pages
-app.add_page("Quick Project Summary", page_summary_body)
-app.add_page("Feature Correlation", page_feature_correlation_body)
-app.add_page("Predict House Price", page_predict_price_body)
-app.add_page("ML Model", page_ml_model_body)
+app.add_page("Quick Project Summary", data_summary_body)
+app.add_page("Feature Correlation", feature_correlation_body)
+app.add_page("Predict House Price", predict_sale_price_body)
+app.add_page("ML Model Summary", model_performance_body)
+app.add_page("Hypotheses Validation", hypotheses_validation_body)
 
 # Run the app
 app.run()
