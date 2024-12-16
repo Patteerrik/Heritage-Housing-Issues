@@ -1,4 +1,4 @@
 import streamlit as st
 
-def page_predict_price_body():
+def predict_sale_price_body():
     st.title("Predict price")

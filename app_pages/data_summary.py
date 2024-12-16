@@ -1,6 +1,6 @@
 import streamlit as st
 
-def page_summary_body():
+def data_summary_body():
     # Header for the project summary
     st.write("### Project Overview")
 
