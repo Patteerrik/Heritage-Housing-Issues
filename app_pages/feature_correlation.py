@@ -4,7 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 def feature_correlation_body():
-    # Ladda data från en CSV-fil (ändra sökvägen till din fil)
+    # Load CSV-file
     df = pd.read_csv('jupyter_notebooks/outputs/datasets/collection/HousePricesFeatures.csv')  # Ersätt med din egna datakälla
 
     # Set the title and description for the page
@@ -17,33 +17,33 @@ def feature_correlation_body():
 
     # Display the top correlated features
     st.write("#### Top Correlated Features")
-    st.dataframe(correlation_with_saleprice.head(10))  # Show the top 10 correlated features
+    st.dataframe(correlation_with_saleprice.head(10))
 
     # Create a button to show/hide the plots
-    show_plots = st.button("Show Correlation Plots")
+    show_plots = st.checkbox("Show Correlation Plots", value=False)
 
     if show_plots:
-        # Create visualizations for each top feature in separate plots
+        # Skapa visualiseringar för varje toppfunktion i separata grafer
         st.write("#### Visualizations")
-        top_features = correlation_with_saleprice.head(5).index  # Get the top 5 correlated features
+        top_features = correlation_with_saleprice.head(5).index
 
-        # Create a separate plot for each top feature
+        # Skapa en separat graf för varje toppfunktion
         for feature in top_features:
             fig, ax = plt.subplots(figsize=(10, 6))
 
-            # Create scatter plot for each feature
+            # Skapa scatter plot för varje funktion
             sns.scatterplot(x=df[feature], y=df['SalePrice'], ax=ax, label=feature, s=80)
 
-            # Add a regression line for each feature
+            # Lägg till en regressionlinje för varje funktion
             sns.regplot(x=df[feature], y=df['SalePrice'], ax=ax, scatter=False, line_kws={'linewidth': 2, 'color': 'red'})
 
-            # Set the title, axis labels, and legend
+            # Sätt titel, axelrubriker och legend
             ax.set_title(f"{feature} vs Sale Price", fontsize=16)
             ax.set_xlabel(f"{feature} Values", fontsize=12)
             ax.set_ylabel("Sale Price", fontsize=12)
             ax.legend(title="Features")
 
-            # Display each plot separately in Streamlit
+            # Visa varje graf separat i Streamlit
             st.pyplot(fig)
 
     # Interpretation and conclusions

@@ -1,15 +1,18 @@
 import streamlit as st
 
 def data_summary_body():
+
     # Header for the project summary
     st.write("### Project Overview")
 
     # Summary of the dataset used in the project
     st.info(
         "**Dataset Overview**\n"
-        "This project uses data from house sales in Ames, Iowa, containing information about "
-        "23 features that potentially impact the house prices. These features include aspects such as "
-        "first floor area, basement size, deck area, overall quality, and construction date, among others.\n\n"
+    "This project uses data from house sales in Ames, Iowa, containing information about "
+    "various features that potentially impact the house prices. Some of the most strongly correlated features with "
+    "sale prices include aspects such as overall quality, total square footage, and living area.\n\n"
+    "Although other features like first floor area, basement size, and deck area are part of the dataset, their correlation "
+    "with sale prices is generally lower than 0.4. Therefore, they play a less significant role in predicting house prices."
     )
 
     # Provide a link to the README for further project documentation
