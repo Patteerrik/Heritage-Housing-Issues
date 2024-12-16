@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def feature_correlation_body():
     # Load CSV-file
-    df = pd.read_csv('jupyter_notebooks/outputs/datasets/collection/HousePricesFeatures.csv')  # Ersätt med din egna datakälla
+    df = pd.read_csv('jupyter_notebooks/outputs/datasets/collection/HousePricesFeatures.csv')
 
     # Set the title and description for the page
     st.title("Feature Correlation with Sale Price")
