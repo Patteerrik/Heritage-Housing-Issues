@@ -18,6 +18,10 @@ def hypotheses_validation_body():
     st.write("#### Total Area vs Sale Price")
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.scatterplot(x=df['GrLivArea'] + df['2ndFlrSF'], y=df['SalePrice'], ax=ax)
+
+    # Add a red trendline
+    sns.regplot(x=df['GrLivArea'] + df['2ndFlrSF'], y=df['SalePrice'], ax=ax, scatter=False, line_kws={'color': 'red', 'linewidth': 2})
+
     ax.set_title('Total Area vs Sale Price')
     ax.set_xlabel('Total Area (GrLivArea + 2ndFlrSF)')
     ax.set_ylabel('Sale Price')
@@ -33,6 +37,10 @@ def hypotheses_validation_body():
     st.write("#### Overall Quality vs Sale Price")
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.scatterplot(x=df['OverallQual'], y=df['SalePrice'], ax=ax)
+
+    # Add a red trendline
+    sns.regplot(x=df['OverallQual'], y=df['SalePrice'], ax=ax, scatter=False, line_kws={'color': 'red', 'linewidth': 2})
+
     ax.set_title('Overall Quality vs Sale Price')
     ax.set_xlabel('Overall Quality')
     ax.set_ylabel('Sale Price')
@@ -48,6 +56,10 @@ def hypotheses_validation_body():
     st.write("#### Garage Area vs Sale Price")
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.scatterplot(x=df['GarageArea'], y=df['SalePrice'], ax=ax)
+
+    # Add a red trendline
+    sns.regplot(x=df['GarageArea'], y=df['SalePrice'], ax=ax, scatter=False, line_kws={'color': 'red', 'linewidth': 2})
+    
     ax.set_title('Garage Area vs Sale Price')
     ax.set_xlabel('Garage Area')
     ax.set_ylabel('Sale Price')
