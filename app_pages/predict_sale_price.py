@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import json
 
 def predict_sale_price_body():
     # Load the trained model 
@@ -9,11 +10,11 @@ def predict_sale_price_body():
     st.write(f"Loaded model type: {type(model)}")
 
     # Load the saved pipeline
-    pipeline = joblib.load("outputs/pipeline/feature_pipeline.pkl")
+    pipeline = joblib.load("jupyter_notebooks/outputs/pipelines/feature_pipeline.pkl")
     st.write("Feature engineering pipeline loaded successfully.")
 
     # Load selected features
-    with open("outputs/selected_features.json", "r") as f:
+    with open("jupyter_notebooks/outputs/selected_features.json", "r") as f:
         selected_features = json.load(f)
     st.write(f"Selected features: {selected_features}")
 
@@ -34,7 +35,12 @@ def predict_sale_price_body():
     )
 
     # Transform the input data using the pipeline
-    input_data_transformed = pipeline.transform(input_data)
+    try:
+        input_data_transformed = pipeline.transform(input_data)
+        st.write("Input data transformed successfully.")
+    except Exception as e:
+        st.error(f"Error during data transformation: {e}")
+        return
 
     # Display a button to make the prediction
     if st.button("Predict Sale Price"):
