@@ -23,10 +23,10 @@ def predict_sale_price_body():
     st.write("Enter the details of the house to predict its sale price.")
 
     # Create input fields for house features
-    gr_liv_area = st.number_input("GrLivArea (Above ground living area in square feet)", min_value=0)
+    gr_liv_area = st.number_input("GrLivArea (Above ground living area in square feet)", min_value=1)
     overall_quality = st.slider("Overall Quality (1 to 10)", 1, 10, 5)
-    garage_area = st.number_input("GarageArea (Area of the garage in square feet)", min_value=0)
-    total_bsmt_sf = st.number_input("TotalBsmtSF (Total basement area in square feet)", min_value=0)
+    garage_area = st.number_input("GarageArea (Area of the garage in square feet)", min_value=1)
+    total_bsmt_sf = st.number_input("TotalBsmtSF (Total basement area in square feet)", min_value=1)
 
     # Prepare the input data as a DataFrame with feature names
     input_data = pd.DataFrame(
