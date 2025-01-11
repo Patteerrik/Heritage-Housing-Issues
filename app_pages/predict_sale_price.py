@@ -6,6 +6,16 @@ import joblib
 def predict_sale_price_body():
     # Load the trained model 
     model = joblib.load('jupyter_notebooks/outputs/best_model/best_gradient_boosting_model.pkl')
+    st.write(f"Loaded model type: {type(model)}")
+
+    # Load the saved pipeline
+    pipeline = joblib.load("outputs/pipeline/feature_pipeline.pkl")
+    st.write("Feature engineering pipeline loaded successfully.")
+
+    # Load selected features
+    with open("outputs/selected_features.json", "r") as f:
+        selected_features = json.load(f)
+    st.write(f"Selected features: {selected_features}")
 
     # Set the title and description for the page
     st.title("Predict Sale Price of a House")
@@ -17,13 +27,19 @@ def predict_sale_price_body():
     garage_area = st.number_input("GarageArea (Area of the garage in square feet)", min_value=0)
     total_bsmt_sf = st.number_input("TotalBsmtSF (Total basement area in square feet)", min_value=0)
 
-    # Prepare the input data as a list and ensure it matches the model's expected input
-    input_data = np.array([gr_liv_area, overall_quality, garage_area, total_bsmt_sf]).reshape(1, -1)
+    # Prepare the input data as a DataFrame with feature names
+    input_data = pd.DataFrame(
+        [[gr_liv_area, overall_quality, garage_area, total_bsmt_sf]],
+        columns=selected_features[:-1]  # Exclude 'SalePrice'
+    )
+
+    # Transform the input data using the pipeline
+    input_data_transformed = pipeline.transform(input_data)
 
     # Display a button to make the prediction
     if st.button("Predict Sale Price"):
         # Make the prediction
-        prediction = model.predict(input_data)
+        prediction = model.predict(input_data_transformed)
         # Convert prediction to original scale (inverse log transform)
         predicted_price = np.expm1(prediction[0])
         st.write(f"The predicted sale price is: ${predicted_price:,.2f}")
