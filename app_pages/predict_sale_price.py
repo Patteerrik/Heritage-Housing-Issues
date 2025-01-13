@@ -2,68 +2,74 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
-import json
 
 def predict_sale_price_body():
-    # Load the trained model 
-    model = joblib.load('jupyter_notebooks/outputs/best_model/best_gradient_boosting_model.pkl')
-    st.write(f"Loaded model type: {type(model)}")
+    # Load the trained model
+    model = joblib.load('jupyter_notebooks/outputs/best_model/best_xgboost_model.pkl')
 
     # Load the saved pipeline
     pipeline = joblib.load("jupyter_notebooks/outputs/pipelines/feature_pipeline.pkl")
-    st.write("Feature engineering pipeline loaded successfully.")
 
-    # Load selected features
-    with open("jupyter_notebooks/outputs/selected_features.json", "r") as f:
-        selected_features = json.load(f)
-    st.write(f"Selected features: {selected_features}")
+    # Define the feature order used by the model
+    model_features = ['OverallQual', 'GrLivArea', 'GarageArea', 'TotalBsmtSF']
 
-    # Set the title and description for the page
-    st.title("Predict Sale Price of a House")
+    # Section 1: Display inherited houses data
+    st.write("### Inherited Properties")
+    df_inherited = pd.read_csv("inputs/datasets/raw/house-price-20211124T154130Z-001/house-price/inherited_houses.csv")
+    st.write("**Inherited house properties:**")
+    st.dataframe(df_inherited)
+
+    # Filter data based on the model's features
+    df_inherited_filtered = df_inherited[model_features]
+
+    # Transform the data and predict prices
+    try:
+        input_data_transformed = pipeline.transform(df_inherited_filtered)
+        print("Transformed data (inherited houses):\n", input_data_transformed[:5])  # Lägg till denna rad
+        predictions = model.predict(input_data_transformed)
+        df_inherited['Predicted Sale Price'] = np.expm1(predictions)  # Om log-transform användes
+    except Exception as e:
+       st.error(f"Error during prediction: {e}")
+       return
+
+    # Section 2: Display predicted prices
+    st.write("### Predicted Inherited Property Prices")
+    st.write("**Predicted prices for inherited houses:**")
+    st.dataframe(df_inherited[['OverallQual', 'GrLivArea', 'GarageArea', 'TotalBsmtSF', 'Predicted Sale Price']])
+
+    # Display the total predicted price
+    total_price = df_inherited['Predicted Sale Price'].sum()
+    st.write(f"**Total predicted sale price for all inherited houses: ${total_price:,.2f}**")
+
+    # Section 3: Manual prediction for a new house
+    st.write("---")
+    st.write("### Predict Sale Price for a New House")
     st.write("Enter the details of the house to predict its sale price.")
 
-    # Create input fields for house features
-    gr_liv_area = st.number_input("GrLivArea (Above ground living area in square feet)", min_value=1)
-    overall_quality = st.slider("Overall Quality (1 to 10)", 1, 10, 5)
-    garage_area = st.number_input("GarageArea (Area of the garage in square feet)", min_value=1)
-    total_bsmt_sf = st.number_input("TotalBsmtSF (Total basement area in square feet)", min_value=1)
+    # Create input fields for manual house feature inputs
+    input_data = {}
+    for feature in model_features:
+        if feature == 'OverallQual':  # Special handling for categorical-like sliders
+            input_data[feature] = st.slider(f"{feature} (1 to 10)", 1, 10, 5)
+        else:
+            input_data[feature] = st.number_input(f"{feature} (Enter value)", min_value=1)
 
-    # Prepare the input data as a DataFrame with feature names
-    input_data = pd.DataFrame(
-        [[gr_liv_area, overall_quality, garage_area, total_bsmt_sf]],
-        columns=selected_features[:-1]  # Exclude 'SalePrice'
-    )
+    # Convert input data to DataFrame in correct feature order
+    input_data_df = pd.DataFrame([input_data], columns=model_features)
 
-    # Transform the input data using the pipeline
-    try:
-        input_data_transformed = pipeline.transform(input_data)
-        st.write("Input data transformed successfully.")
-    except Exception as e:
-        st.error(f"Error during data transformation: {e}")
-        return
+    # Convert input data to DataFrame in correct feature order
+    input_data_df = pd.DataFrame([input_data], columns=model_features)
 
     # Display a button to make the prediction
     if st.button("Predict Sale Price"):
-        # Make the prediction
-        prediction = model.predict(input_data_transformed)
-        # Convert prediction to original scale (inverse log transform)
-        predicted_price = np.expm1(prediction[0])
-        st.write(f"The predicted sale price is: ${predicted_price:,.2f}")
+        try:
+            # Transform the input data
+            input_data_transformed = pipeline.transform(input_data_df)
+            # Make the prediction
+            prediction = model.predict(input_data_transformed)
+            # Convert prediction to original scale (inverse log transform if applicable)
+            predicted_price = np.expm1(prediction[0])  # Remove np.expm1 if no log-transform was applied
+            st.write(f"The predicted sale price is: ${predicted_price:,.2f}")
+        except Exception as e:
+            st.error(f"Error during prediction: {e}")
 
-    # Add some explanation
-    st.write("### How it works:")
-    st.info("This page allows you to predict the sale price of a house based on the most impactful features: living area, overall quality, garage size, and total basement area. The model uses these features to estimate the price based on the house price data it was trained on.")
-
-    # Show a sample dataset or description (optional)
-    st.write("### Sample Data")
-    st.write("Here is an example of how the input features relate to the model prediction.")
-
-    # Example sample data
-    sample_data = {
-        "GrLivArea": [1500, 2500, 1800],
-        "Overall Quality": [5, 8, 7],
-        "GarageArea": [500, 600, 450],
-        "TotalBsmtSF": [800, 1200, 1000]
-    }
-    sample_df = pd.DataFrame(sample_data)
-    st.dataframe(sample_df)
