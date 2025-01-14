@@ -5,7 +5,7 @@ import joblib
 
 def predict_sale_price_body():
     # Load the trained model
-    model = joblib.load('jupyter_notebooks/outputs/best_model/best_xgboost_model.pkl')
+    model = joblib.load('jupyter_notebooks/outputs/best_model/best_gradient_boosting_model.pkl')
 
     # Load the saved pipeline
     pipeline = joblib.load("jupyter_notebooks/outputs/pipelines/feature_pipeline.pkl")
@@ -19,16 +19,34 @@ def predict_sale_price_body():
     st.write("**Inherited house properties:**")
     st.dataframe(df_inherited)
 
-    # Filter and preprocess data based on the model's features
     try:
+        # Filter only the required features
         df_inherited_filtered = df_inherited[model_features]
-        input_data_transformed = pd.DataFrame(
-            pipeline.transform(df_inherited_filtered),
-            columns=model_features
+
+        # Ensure positive values for Box-Cox transformation
+        df_inherited_filtered['GrLivArea'] = df_inherited_filtered['GrLivArea'].apply(lambda x: x + 1 if x <= 0 else x)
+        df_inherited_filtered['TotalBsmtSF'] = df_inherited_filtered['TotalBsmtSF'].apply(lambda x: x + 1 if x <= 0 else x)
+
+        # Separate features to transform and untouched ones
+        features_to_transform = ['GrLivArea', 'GarageArea', 'TotalBsmtSF']
+        untouched_features = ['OverallQual']
+
+        # Transform only the necessary features
+        transformed_data = pd.DataFrame(
+            pipeline.transform(df_inherited_filtered[features_to_transform]),
+            columns=features_to_transform
         )
-        print("Transformed data (inherited houses):\n", input_data_transformed.head())  # Kontrollera transformationen
+
+        # Combine transformed features with untouched ones
+        input_data_transformed = pd.concat([df_inherited_filtered[untouched_features].reset_index(drop=True), transformed_data], axis=1)
+
+        # Display transformed data
+        st.write("Transformed data (inherited houses):")
+        st.dataframe(input_data_transformed.head())
+
+        # Predict prices
         predictions = model.predict(input_data_transformed)
-        df_inherited['Predicted Sale Price'] = predictions  # Remove np.expm1 if no log-transform applied
+        df_inherited['Predicted Sale Price'] = predictions
     except Exception as e:
         st.error(f"Error during prediction: {e}")
         return
@@ -58,20 +76,19 @@ def predict_sale_price_body():
     # Convert input data to DataFrame in correct feature order
     input_data_df = pd.DataFrame([input_data], columns=model_features)
 
-    # Convert input data to DataFrame in correct feature order
-    input_data_df = pd.DataFrame([input_data], columns=model_features)
-
-    # Display a button to make the prediction
     if st.button("Predict Sale Price"):
         try:
-            # Transform the input data
-            input_data_transformed = pd.DataFrame(
-                pipeline.transform(input_data_df),
-                columns=model_features
+            # Separate features to transform and untouched ones
+            transformed_input = pd.DataFrame(
+                pipeline.transform(input_data_df[features_to_transform]),
+                columns=features_to_transform
             )
-            # Make the prediction
-            prediction = model.predict(input_data_transformed)
-            # Convert prediction to original scale (inverse log transform if applicable)
+
+            # Combine transformed features with untouched ones
+            final_input_data = pd.concat([input_data_df[untouched_features].reset_index(drop=True), transformed_input], axis=1)
+
+            # Predict sale price
+            prediction = model.predict(final_input_data)
             predicted_price = prediction[0]
             st.write(f"The predicted sale price is: ${predicted_price:,.2f}")
         except Exception as e:
