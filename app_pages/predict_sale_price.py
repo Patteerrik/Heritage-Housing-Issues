@@ -19,18 +19,19 @@ def predict_sale_price_body():
     st.write("**Inherited house properties:**")
     st.dataframe(df_inherited)
 
-    # Filter data based on the model's features
-    df_inherited_filtered = df_inherited[model_features]
-
-    # Transform the data and predict prices
+    # Filter and preprocess data based on the model's features
     try:
-        input_data_transformed = pipeline.transform(df_inherited_filtered)
-        print("Transformed data (inherited houses):\n", input_data_transformed[:5])  # Lägg till denna rad
+        df_inherited_filtered = df_inherited[model_features]
+        input_data_transformed = pd.DataFrame(
+            pipeline.transform(df_inherited_filtered),
+            columns=model_features
+        )
+        print("Transformed data (inherited houses):\n", input_data_transformed.head())  # Kontrollera transformationen
         predictions = model.predict(input_data_transformed)
-        df_inherited['Predicted Sale Price'] = np.expm1(predictions)  # Om log-transform användes
+        df_inherited['Predicted Sale Price'] = predictions  # Remove np.expm1 if no log-transform applied
     except Exception as e:
-       st.error(f"Error during prediction: {e}")
-       return
+        st.error(f"Error during prediction: {e}")
+        return
 
     # Section 2: Display predicted prices
     st.write("### Predicted Inherited Property Prices")
@@ -64,11 +65,14 @@ def predict_sale_price_body():
     if st.button("Predict Sale Price"):
         try:
             # Transform the input data
-            input_data_transformed = pipeline.transform(input_data_df)
+            input_data_transformed = pd.DataFrame(
+                pipeline.transform(input_data_df),
+                columns=model_features
+            )
             # Make the prediction
             prediction = model.predict(input_data_transformed)
             # Convert prediction to original scale (inverse log transform if applicable)
-            predicted_price = np.expm1(prediction[0])  # Remove np.expm1 if no log-transform was applied
+            predicted_price = prediction[0]
             st.write(f"The predicted sale price is: ${predicted_price:,.2f}")
         except Exception as e:
             st.error(f"Error during prediction: {e}")
