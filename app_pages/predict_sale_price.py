@@ -5,56 +5,77 @@ import joblib
 
 def predict_sale_price_body():
     # Load the trained model
-    model = joblib.load('jupyter_notebooks/outputs/best_model/optimized_gradient_boosting_model.pkl')
+    try:
+        model = joblib.load('jupyter_notebooks/outputs/best_model/optimized_gradient_boosting_model.pkl')
+        st.write("✅ Model loaded successfully.")
+    except Exception as e:
+        st.error(f"❌ Error loading model: {e}")
+        return
 
     # Load the saved pipeline
-    pipeline = joblib.load("jupyter_notebooks/outputs/pipelines/feature_pipeline.pkl")
+    try:
+        pipeline = joblib.load("jupyter_notebooks/outputs/pipelines/feature_pipeline.pkl")
+        st.write("✅ Pipeline loaded successfully.")
+    except Exception as e:
+        st.error(f"❌ Error loading pipeline: {e}")
+        return
 
     # Define the feature order used by the model
-    model_features = ['OverallQual', 'GrLivArea', 'GarageArea', 'TotalBsmtSF']
+    model_features = ['OverallQual', 'GrLivArea', 'GarageArea', 'TotalBsmtSF', 'YearRemodAdd']
+    st.write(f"Expected features by the model: {model_features}")
 
     # Section 1: Display inherited houses data
     st.write("### Inherited Properties")
-    df_inherited = pd.read_csv("inputs/datasets/raw/house-price-20211124T154130Z-001/house-price/inherited_houses.csv")
-    st.write("**Inherited house properties:**")
-    st.dataframe(df_inherited)
+    try:
+        df_inherited = pd.read_csv("inputs/datasets/raw/house-price-20211124T154130Z-001/house-price/inherited_houses.csv")
+        st.write("**Inherited house properties:**")
+        st.dataframe(df_inherited)
+        st.write(f"Loaded inherited data shape: {df_inherited.shape}")
+    except Exception as e:
+        st.error(f"❌ Error loading inherited data: {e}")
+        return
+
+    # Check if required features are present
+    missing_features = [feature for feature in model_features if feature not in df_inherited.columns]
+    if missing_features:
+        st.error(f"❌ Missing columns in inherited data: {missing_features}")
+        return
+    else:
+        st.write("✅ All required features are present in the dataset.")
 
     try:
         # Filter only the required features
         df_inherited_filtered = df_inherited[model_features]
+        st.write("Filtered inherited data (before transformation):")
+        st.dataframe(df_inherited_filtered)
+    except Exception as e:
+        st.error(f"❌ Error filtering data: {e}")
+        return
 
-        # Ensure positive values for Box-Cox transformation
-        df_inherited_filtered['GrLivArea'] = df_inherited_filtered['GrLivArea'].apply(lambda x: x + 1 if x <= 0 else x)
-        df_inherited_filtered['TotalBsmtSF'] = df_inherited_filtered['TotalBsmtSF'].apply(lambda x: x + 1 if x <= 0 else x)
-
-        # Separate features to transform and untouched ones
-        features_to_transform = ['GrLivArea', 'GarageArea', 'TotalBsmtSF']
-        untouched_features = ['OverallQual']
-
-        # Transform only the necessary features
+    try:
+        # Transform data using the pipeline
         transformed_data = pd.DataFrame(
-            pipeline.transform(df_inherited_filtered[features_to_transform]),
-            columns=features_to_transform
+            pipeline.transform(df_inherited_filtered),
+            columns=pipeline.named_steps['feature_transformation'].get_feature_names_out()
         )
-
-        # Combine transformed features with untouched ones
-        input_data_transformed = pd.concat([df_inherited_filtered[untouched_features].reset_index(drop=True), transformed_data], axis=1)
-
-        # Display transformed data
         st.write("Transformed data (inherited houses):")
-        st.dataframe(input_data_transformed.head())
+        st.dataframe(transformed_data.head())
+    except Exception as e:
+        st.error(f"❌ Error during transformation: {e}")
+        return
 
+    try:
         # Predict prices
-        predictions = model.predict(input_data_transformed)
+        predictions = model.predict(transformed_data)
         df_inherited['Predicted Sale Price'] = predictions
     except Exception as e:
-        st.error(f"Error during prediction: {e}")
+        st.error(f"❌ Error during prediction: {e}")
         return
 
     # Section 2: Display predicted prices
     st.write("### Predicted Inherited Property Prices")
     st.write("**Predicted prices for inherited houses:**")
-    st.dataframe(df_inherited[['OverallQual', 'GrLivArea', 'GarageArea', 'TotalBsmtSF', 'Predicted Sale Price']])
+    st.dataframe(df_inherited[['OverallQual', 'GrLivArea', 'GarageArea', 'TotalBsmtSF', 'YearRemodAdd', 'Predicted Sale Price']])
 
     # Display the total predicted price
     total_price = df_inherited['Predicted Sale Price'].sum()
@@ -78,18 +99,18 @@ def predict_sale_price_body():
 
     if st.button("Predict Sale Price"):
         try:
-            # Separate features to transform and untouched ones
+            # Transform input data using the pipeline
             transformed_input = pd.DataFrame(
-                pipeline.transform(input_data_df[features_to_transform]),
-                columns=features_to_transform
+                pipeline.transform(input_data_df),
+                columns=pipeline.named_steps['feature_transformation'].get_feature_names_out()
             )
 
-            # Combine transformed features with untouched ones
-            final_input_data = pd.concat([input_data_df[untouched_features].reset_index(drop=True), transformed_input], axis=1)
-
             # Predict sale price
-            prediction = model.predict(final_input_data)
+            prediction = model.predict(transformed_input)
             predicted_price = prediction[0]
             st.write(f"The predicted sale price is: ${predicted_price:,.2f}")
         except Exception as e:
-            st.error(f"Error during prediction: {e}")
+            st.error(f"❌ Error during manual prediction: {e}")
+
+# Call the prediction function
+predict_sale_price_body()
