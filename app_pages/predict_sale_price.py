@@ -5,7 +5,7 @@ import joblib
 
 def predict_sale_price_body():
     # Load the trained model
-    model = joblib.load('jupyter_notebooks/outputs/best_model/best_gradient_boosting_model.pkl')
+    model = joblib.load('jupyter_notebooks/outputs/best_model/optimized_gradient_boosting_model.pkl')
 
     # Load the saved pipeline
     pipeline = joblib.load("jupyter_notebooks/outputs/pipelines/feature_pipeline.pkl")
@@ -93,4 +93,3 @@ def predict_sale_price_body():
             st.write(f"The predicted sale price is: ${predicted_price:,.2f}")
         except Exception as e:
             st.error(f"Error during prediction: {e}")
-
