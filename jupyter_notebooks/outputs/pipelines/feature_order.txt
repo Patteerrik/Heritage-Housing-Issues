@@ -1,0 +1,5 @@
+OverallQual
+GrLivArea
+TotalBsmtSF
+YearRemodAdd
+GarageArea
