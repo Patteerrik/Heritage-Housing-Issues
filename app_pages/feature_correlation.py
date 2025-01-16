@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def feature_correlation_body():
     # Load CSV-file
-    df = pd.read_csv('jupyter_notebooks/outputs/datasets/collection/HousePricesFeatures.csv')
+    df = pd.read_csv('jupyter_notebooks/outputs/datasets/collection/HousePricesPredictionFeatures_Cleaned.csv')
 
     # Set the title and description for the page
     st.title("Feature Correlation with Sale Price")
@@ -15,17 +15,17 @@ def feature_correlation_body():
     correlation = df.corr()
     correlation_with_saleprice = correlation['SalePrice'].sort_values(ascending=False)
 
-    # Get the top 10 correlated features with SalePrice
-    top_10_features = correlation_with_saleprice.head(10)
+    # Get the top 5 correlated features with SalePrice
+    top_6_features = correlation_with_saleprice.head(6)
     
-    st.write("#### Correlation with SalePrice for Top 10 Features")
+    st.write("#### Correlation with SalePrice for Top 5 Features")
 
-    # Create a new DataFrame for the heatmap (only the top 10 features and their correlation with SalePrice)
-    top_10_df = top_10_features.to_frame()  # Convert the series to a DataFrame
+    # Create a new DataFrame for the heatmap
+    top_6_df = top_6_features.to_frame()  # Convert the series to a DataFrame
 
     # Create and display a heatmap showing only the correlation of each feature with SalePrice
     fig, ax = plt.subplots(figsize=(8, 6))  # Set figure size for better clarity
-    sns.heatmap(top_10_df.T, annot=True, cmap='coolwarm', fmt='.2f', ax=ax, cbar=True, linewidths=0.5)
+    sns.heatmap(top_6_df.T, annot=True, cmap='coolwarm', fmt='.2f', ax=ax, cbar=True, linewidths=0.5)
     ax.set_title("Correlation with SalePrice", fontsize=16)
     st.pyplot(fig)
 
@@ -58,12 +58,15 @@ def feature_correlation_body():
     # Interpretation and conclusions
     st.write("#### Interpretation and Conclusions")
     st.success(
-        f"The analysis shows that the most strongly correlated features with sale price are **OverallQual** and **GrLivArea**."
-        f" These features have a strong positive correlation, meaning that better quality and larger living area lead to higher sale prices."
-        f" Other features like **GarageArea**, **BsmtFinSF1**, and **KitchenQual_Ex** also have a positive correlation with sale price."
-        f" Larger garage areas and finished basements also help increase house prices. **GarageFinish_Fin** and **2ndFlrSF** also show a positive correlation,"
-        f" but not as strong."
+        "The analysis highlights that the features most strongly correlated with sale price include **OverallQual**, **GrLivArea**, **TotalBsmtSF**, **GarageArea**, and **YearRemodAdd**. "
+        "Here’s how they impact the sale prices:"
+        "\n- **OverallQual (0.79 correlation)**: This suggests a strong positive correlation, indicating that higher overall quality significantly increases the sale price."
+        "\n- **GrLivArea (0.71 correlation)** and **TotalBsmtSF (0.61 correlation)**: Larger living areas and basement sizes are also positively correlated with higher sale prices, confirming that buyers value more spacious homes."
+        "\n- **GarageArea (0.61 correlation)**: Similarly, a larger garage space contributes positively to the home's value."
+        "\n- **YearRemodAdd (0.51 correlation)**: Recent remodels add to the sale price, suggesting that newer features or updates are important to buyers."
+        "\nThese insights confirm that both the size and quality of various home features are critical in influencing house prices in Ames, Iowa."
     )
+
 
 
     # Methodology
