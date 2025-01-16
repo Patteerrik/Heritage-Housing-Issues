@@ -55,17 +55,23 @@ def feature_correlation_body():
                 st.pyplot(fig)
 
 
-    # Interpretation and conclusions
-    st.write("#### Interpretation and Conclusions")
-    st.success(
-        "The analysis highlights that the features most strongly correlated with sale price include **OverallQual**, **GrLivArea**, **TotalBsmtSF**, **GarageArea**, and **YearRemodAdd**. "
-        "Here’s how they impact the sale prices:"
-        "\n- **OverallQual (0.79 correlation)**: This suggests a strong positive correlation, indicating that higher overall quality significantly increases the sale price."
-        "\n- **GrLivArea (0.71 correlation)** and **TotalBsmtSF (0.61 correlation)**: Larger living areas and basement sizes are also positively correlated with higher sale prices, confirming that buyers value more spacious homes."
-        "\n- **GarageArea (0.61 correlation)**: Similarly, a larger garage space contributes positively to the home's value."
-        "\n- **YearRemodAdd (0.51 correlation)**: Recent remodels add to the sale price, suggesting that newer features or updates are important to buyers."
-        "\nThese insights confirm that both the size and quality of various home features are critical in influencing house prices in Ames, Iowa."
-    )
+        # Interpretation and conclusions
+        st.write("#### Interpretation and Conclusions")
+
+        st.info(
+            "The analysis successfully addressed the client's requirement to understand how different house attributes correlate with sale prices. "
+            "We conducted a detailed correlation analysis to identify the most relevant features, visualized these correlations, and summarized the key insights."
+        )
+
+        st.success(
+            "The analysis highlights that the features most strongly correlated with sale price include **OverallQual**, **GrLivArea**, **TotalBsmtSF**, **GarageArea**, and **YearRemodAdd**. "
+            "Here’s how they impact the sale prices:"
+            "\n- **OverallQual (0.79 correlation)**: This suggests a strong positive correlation, indicating that higher overall quality significantly increases the sale price."
+            "\n- **GrLivArea (0.71 correlation)** and **TotalBsmtSF (0.61 correlation)**: Larger living areas and basement sizes are also positively correlated with higher sale prices, confirming that buyers value more spacious homes."
+            "\n- **GarageArea (0.61 correlation)**: Similarly, a larger garage space contributes positively to the home's value."
+            "\n- **YearRemodAdd (0.51 correlation)**: Recent remodels add to the sale price, suggesting that newer features or updates are important to buyers."
+            "\nThese insights confirm that both the size and quality of various home features are critical in influencing house prices in Ames, Iowa."
+        )
 
 
 
