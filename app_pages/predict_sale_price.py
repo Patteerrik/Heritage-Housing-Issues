@@ -22,7 +22,7 @@ def predict_sale_price_body():
     st.write("#### Inherited Properties")
 
     # Load data for inherited houses
-    df_inherited = pd.read_csv("inputs/datasets/raw/house-price-20211124T154130Z-001/house-price/inherited_houses.csv")
+    df_inherited = pd.read_csv("jupyter_notebooks/outputs/datasets/collection/InheritedHouses.csv")
     st.write("**Inherited house properties:**")
     st.dataframe(df_inherited)
 
