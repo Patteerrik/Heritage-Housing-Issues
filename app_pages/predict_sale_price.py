@@ -4,7 +4,7 @@ import joblib
 
 def predict_sale_price_body():
     # Load the trained model and pipeline
-    model_path = 'jupyter_notebooks/outputs/best_model/optimized_gradient_boosting_model.pkl'
+    model_path = 'jupyter_notebooks/outputs/best_model/optimized_random_forest_model.pkl'
     pipeline_path = 'jupyter_notebooks/outputs/pipelines/feature_pipeline_cleaned.pkl'
     
     model = joblib.load(model_path)
