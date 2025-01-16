@@ -1,5 +1,5 @@
-OverallQual
+GarageArea
 GrLivArea
 TotalBsmtSF
+OverallQual
 YearRemodAdd
-GarageArea
