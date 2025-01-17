@@ -20,3 +20,4 @@ ipywidgets==8.0.2
 altair<5
 
 setuptools==65.5.1
+distutils
