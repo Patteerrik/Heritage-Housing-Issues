@@ -1,5 +1,20 @@
 # Heritage Housing Issues
 
+This project helps Lydia Doe, a fictional individual, sell four inherited houses in Ames, Iowa. Lydia knows property markets in Belgium but worries her knowledge won’t work for Ames. To avoid losing money, she asks for help from a Data Practitioner.
+
+## Goals
+
+1. **Analyze house data**  
+   Show how house features affect sale prices with clear visualizations.
+2. **Predict house prices**  
+   Build a model to estimate prices for Lydia’s houses and any house in Ames.
+3. **Create a dashboard**  
+   Provide an easy to use tool for exploring data and predicting house prices.
+
+This project delivers data driven insights and accurate price predictions to help Lydia make the best decisions.
+
+
+
 ## Table of Contents
 - [Dataset Content](#dataset-content)
 - [Business Requirements](#business-requirements)
@@ -140,16 +155,14 @@ The goal is to give the client a reliable tool to estimate house prices, helping
 
 ### Heroku
 
-* The App live link is: <https://YOUR_APP_NAME.herokuapp.com/>
-* Set the runtime.txt Python version to a [Heroku-20](https://devcenter.heroku.com/articles/python-support#supported-runtimes) stack currently supported version.
 * The project was deployed to Heroku using the following steps.
 
-1. Log in to Heroku and create an App
-2. At the Deploy tab, select GitHub as the deployment method.
-3. Select your repository name and click Search. Once it is found, click Connect.
-4. Select the branch you want to deploy, then click Deploy Branch.
+1. Log in to Heroku and click "new" then "create new app"
+2. Giv it an "app-name" the click "create app"
+3. At the Deploy tab, select GitHub as the deployment method.
+4. Select your repository name and click Search. Once it is found, click "Connect".
+4. Select the branch you want to deploy, then click "Deploy Branch".
 5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button Open App on the top of the page to access your App.
-6. If the slug size is too large then add large files not required for the app to the .slugignore file.
 
 ## Main Data Analysis and Machine Learning Libraries
 
@@ -172,10 +185,7 @@ The goal is to give the client a reliable tool to estimate house prices, helping
   * **Matplotlib:** Was used to create different plots to understand the data, including scatter plots and line plots.
   * **Seaborn:** Was used to create correlation heatmaps and histograms to better understand the relationships between features.
 
-### Feature-engine
-* **Usage**: Using `SmartCorrelatedSelection` from the Feature-engine library to select relevant features and reduce multicollinearity among predictors.
-
-### Streamlit (planned)
+### Streamlit
 * **Usage**: Developing the project dashboard, which will allow users to interact with the model and visualize the results.
 
 ### Content
