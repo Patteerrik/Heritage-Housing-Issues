@@ -13,10 +13,15 @@ def predict_sale_price_body():
     # Define the features used in the model
     best_features = ['GarageArea', 'GrLivArea', 'TotalBsmtSF', 'OverallQual', 'YearRemodAdd']
 
-    # Title and introduction
-    st.title("House Prices Analysis")
-    st.write("### Predict House Sale Prices")
-    st.info("Predict the sale prices for inherited houses and any other property in Ames, Iowa.")
+    # Title and Business Requirement 2
+    st.info("""
+    ### Predict House Sale Prices  
+    This page addresses **Business Requirement 2**, which involves creating a machine learning model to:  
+    - Predict the sale price of the client's four inherited houses and other houses in Ames, Iowa.  
+    - Train and optimize a predictive model to ensure accuracy and reliability.  
+
+    The predictions on this page support data driven decision making for the client.
+    """)
 
     # --- Section 1: Prediction for Inherited Houses ---
     st.write("#### Inherited Properties")
@@ -33,8 +38,6 @@ def predict_sale_price_body():
             pipeline.transform(df_filtered),
             columns=best_features
         )
-        st.write("**Transformed data (inherited houses):**")
-        st.dataframe(transformed_data)
 
         # Predict prices
         predictions = model.predict(transformed_data)
@@ -54,7 +57,10 @@ def predict_sale_price_body():
     # --- Section 2: Prediction for New Data ---
     st.write("---")
     st.write("### Predict Sale Price for a New Property")
-    st.write("Enter the details of the property below:")
+    st.success("""  
+    This feature fulfills **Business Requirement 2**, which focuses on creating a machine learning model to predict house prices for inherited houses and other properties in Ames, Iowa.  
+    The prediction is made using the **best features** identified during model training to ensure accuracy and reliability.
+    """)
 
     input_data = {}
     for feature in best_features:
