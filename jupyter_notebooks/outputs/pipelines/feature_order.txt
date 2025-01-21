@@ -2,4 +2,4 @@ GarageArea
 GrLivArea
 TotalBsmtSF
 OverallQual
-YearRemodAdd
+1stFlrSF
