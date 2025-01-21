@@ -10,6 +10,7 @@ def model_performance_body():
     version = "v1"
     base_path = "jupyter_notebooks/outputs/pipelines/train-test"
     feature_importance_path = "jupyter_notebooks/outputs/pipelines/feature_importance.png"
+    predicted_vs_actual_plot_path = "jupyter_notebooks/outputs/pipelines/predicted_vs_actual_prices.png"
 
     X_train_path = f"{base_path}/{version}/X_train.csv"
     X_test_path = f"{base_path}/{version}/X_test.csv"
@@ -34,6 +35,20 @@ def model_performance_body():
         f"* **Test set:** The test data includes {len(X_test)} samples.\n\n"
         f"**Feature importance analysis is provided below.**"
     )
+    
+    st.write("#### ML Pipeline Steps")
+    with st.expander("View Pipeline Details"):
+        st.code("""
+        Pipeline(steps=[
+            ('feature_transformation',
+             ColumnTransformer(transformers=[
+                 ('yeo_johnson', YeoJohnsonTransformer(variables=['GarageArea'])),
+                 ('scaler', StandardScaler(), ['GrLivArea', 'TotalBsmtSF']),
+                 ('passthrough', 'passthrough', ['OverallQual', 'YearRemodAdd'])
+             ], verbose_feature_names_out=False))
+        ])
+        """, language="python")
+
 
     # Feature Importance
     st.write("---")
@@ -44,18 +59,12 @@ def model_performance_body():
     except Exception as e:
         st.error(f"Error loading feature importance image: {e}")
 
-    # Evaluate model performance (example R2 placeholder)
+    # Predicted vs Actual Prices Scatterplot
     st.write("---")
-    st.write("#### Model Performance on Train and Test Sets")
-    st.write(
-        """
-        Performance metrics (e.g., MAE, RMSE, R2) will be calculated here. 
-        Replace this placeholder with functions or data to display model evaluation results.
-        """
-    )
-
-    # Example placeholders for metrics
-    st.write("**Training set R2 score:** 0.95 (example)")
-    st.write("**Test set R2 score:** 0.85 (example)")
-
-    st.write("---")
+    st.write("#### Predicted vs Actual Prices (Training and Test Sets)")
+    try:
+        st.image(predicted_vs_actual_plot_path, 
+                 caption="Predicted vs Actual Prices (Training and Test Sets)", 
+                 use_column_width=True)
+    except Exception as e:
+        st.error(f"Error loading predicted vs actual prices plot: {e}")
