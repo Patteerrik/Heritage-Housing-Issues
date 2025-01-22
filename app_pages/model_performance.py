@@ -1,32 +1,40 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import joblib
+from joblib import load
+from src.evaluate import regression_performance, regression_evaluation_plots
 
 def model_performance_body():
     st.write("#### ML Model Summary")
 
     # Define file paths
-    version = "v1"
-    base_path = "jupyter_notebooks/outputs/pipelines/train-test"
+    model_path = "jupyter_notebooks/outputs/best_model/optimized_random_forest_model.pkl"
+    base_path = "jupyter_notebooks/outputs/pipelines/train-test/v1"
     feature_importance_path = "jupyter_notebooks/outputs/pipelines/feature_importance.png"
-    predicted_vs_actual_plot_path = "jupyter_notebooks/outputs/pipelines/predicted_vs_actual_prices.png"
 
-    X_train_path = f"{base_path}/{version}/X_train.csv"
-    X_test_path = f"{base_path}/{version}/X_test.csv"
-    y_train_path = f"{base_path}/{version}/y_train.csv"
-    y_test_path = f"{base_path}/{version}/y_test.csv"
+    X_train_path = f"{base_path}/X_train.csv"
+    X_test_path = f"{base_path}/X_test.csv"
+    y_train_path = f"{base_path}/y_train.csv"
+    y_test_path = f"{base_path}/y_test.csv"
 
     # Load data
     try:
         X_train = pd.read_csv(X_train_path)
         X_test = pd.read_csv(X_test_path)
-        y_train = pd.read_csv(y_train_path)
-        y_test = pd.read_csv(y_test_path)
+        y_train = pd.read_csv(y_train_path).squeeze()  # Ensure y is 1D
+        y_test = pd.read_csv(y_test_path).squeeze()   # Ensure y is 1D
+        #st.success("Train and test datasets loaded successfully.")
     except Exception as e:
-        st.error(f"Error loading train-test datasets: {e}")
+        st.error(f"Error loading datasets: {e}")
         return
 
+    # Load the optimized model
+    try:
+        optimized_model = load(model_path)
+        st.success(f"Optimized model loaded successfully from {model_path}")
+    except Exception as e:
+        st.error(f"Error loading the optimized model: {e}")
+        return
+    
     # ML Pipeline Overview
     st.info(
         f"#### ML Pipeline Requirements:\n"
@@ -35,7 +43,7 @@ def model_performance_body():
         f"* **Test set:** The test data includes {len(X_test)} samples.\n\n"
         f"**Feature importance analysis is provided below.**"
     )
-    
+
     st.write("#### ML Pipeline Steps")
     with st.expander("View Pipeline Details"):
         st.code("""
@@ -49,22 +57,23 @@ def model_performance_body():
         ])
         """, language="python")
 
-
-    # Feature Importance
     st.write("---")
     st.write("#### Feature Importance")
-    try:
-        feature_importance = plt.imread(feature_importance_path)
-        st.image(feature_importance, caption="Feature Importance", use_column_width=True)
-    except Exception as e:
-        st.error(f"Error loading feature importance image: {e}")
+    st.image(feature_importance_path, caption="Feature Importance", use_container_width=True)
 
-    # Predicted vs Actual Prices Scatterplot
+    # Expanders for results
     st.write("---")
-    st.write("#### Predicted vs Actual Prices (Training and Test Sets)")
-    try:
-        st.image(predicted_vs_actual_plot_path, 
-                 caption="Predicted vs Actual Prices (Training and Test Sets)", 
-                 use_column_width=True)
-    except Exception as e:
-        st.error(f"Error loading predicted vs actual prices plot: {e}")
+    st.write("#### Model Evaluation")
+
+    # Evaluate model performance
+    with st.expander("View Model Performance Metrics"):
+        regression_performance(X_train, y_train, X_test, y_test, model=optimized_model)
+
+    # Display scatterplots
+    with st.expander("View Predicted vs Actual Scatterplots"):
+        regression_evaluation_plots(X_train, y_train, X_test, y_test, model=optimized_model, alpha_scatter=0.5)
+
+
+if __name__ == "__main__":
+    st.title("House Price Prediction Model Evaluation")
+    model_performance_body()
