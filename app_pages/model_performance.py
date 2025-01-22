@@ -1,49 +1,30 @@
 import streamlit as st
 import pandas as pd
-from joblib import load
+import matplotlib.pyplot as plt
+import joblib
 from src.evaluate import regression_performance, regression_evaluation_plots
 
 def model_performance_body():
     st.write("#### ML Model Summary")
 
     # Define file paths
-    model_path = "jupyter_notebooks/outputs/best_model/optimized_random_forest_model.pkl"
-    base_path = "jupyter_notebooks/outputs/pipelines/train-test/v1"
+    version = "v1"
+    base_path = "jupyter_notebooks/outputs/pipelines/train-test"
     feature_importance_path = "jupyter_notebooks/outputs/pipelines/feature_importance.png"
+    predicted_vs_actual_plot_path = "jupyter_notebooks/outputs/pipelines/predicted_vs_actual_prices.png"
+    model_path = "jupyter_notebooks/outputs/best_model/optimized_random_forest_model.pkl"
 
-    X_train_path = f"{base_path}/X_train.csv"
-    X_test_path = f"{base_path}/X_test.csv"
-    y_train_path = f"{base_path}/y_train.csv"
-    y_test_path = f"{base_path}/y_test.csv"
 
-    # Load data
-    try:
-        X_train = pd.read_csv(X_train_path)
-        X_test = pd.read_csv(X_test_path)
-        y_train = pd.read_csv(y_train_path).squeeze()  # Ensure y is 1D
-        y_test = pd.read_csv(y_test_path).squeeze()   # Ensure y is 1D
-        #st.success("Train and test datasets loaded successfully.")
-    except Exception as e:
-        st.error(f"Error loading datasets: {e}")
-        return
-
-    # Load the optimized model
-    try:
-        optimized_model = load(model_path)
-        st.success(f"Optimized model loaded successfully from {model_path}")
-    except Exception as e:
-        st.error(f"Error loading the optimized model: {e}")
-        return
-    
     # ML Pipeline Overview
     st.info(
         f"#### ML Pipeline Requirements:\n"
         f"* The client requested an *R2* score of at least 0.75 on both training and test sets.\n"
-        f"* **Train set:** The training data includes {len(X_train)} samples.\n"
-        f"* **Test set:** The test data includes {len(X_test)} samples.\n\n"
-        f"**Feature importance analysis is provided below.**"
+        f"* The model is trained and optimized using the Random Forest Regressor.\n"
+        f"**Evaluation Results:**\n"
+        f"* The training set achieved an R2 score of 0.961, which exceeds the required threshold.\n"
+        f"* The test set achieved an R2 score of 0.866, confirming the model's generalization is well within the agreed limits.\n"
     )
-
+    
     st.write("#### ML Pipeline Steps")
     with st.expander("View Pipeline Details"):
         st.code("""
@@ -57,23 +38,41 @@ def model_performance_body():
         ])
         """, language="python")
 
+    # Load the optimized model
+    try:
+        optimized_model = joblib.load(model_path)
+    except Exception as e:
+        st.error(f"Error loading the optimized model: {e}")
+        return
+
+    # Feature Importance
     st.write("---")
     st.write("#### Feature Importance")
-    st.image(feature_importance_path, caption="Feature Importance", use_container_width=True)
+    try:
+        feature_importance = plt.imread(feature_importance_path)
+        st.image(feature_importance, caption="Feature Importance", use_container_width =True)
+    except Exception as e:
+        st.error(f"Error loading feature importance image: {e}")
 
-    # Expanders for results
+    # Model Evaluation Metrics
     st.write("---")
-    st.write("#### Model Evaluation")
+    st.subheader("Model Evaluation Metrics")
+    with st.expander("View Performance Metrics"):
+        regression_performance(model=optimized_model)
 
-    # Evaluate model performance
-    with st.expander("View Model Performance Metrics"):
-        regression_performance(X_train, y_train, X_test, y_test, model=optimized_model)
-
-    # Display scatterplots
+    # Predicted vs Actual Scatterplots
     with st.expander("View Predicted vs Actual Scatterplots"):
-        regression_evaluation_plots(X_train, y_train, X_test, y_test, model=optimized_model, alpha_scatter=0.5)
-
+        # Add a comment about price range performance
+        st.success(
+            """
+            **Comment on price range performance:**  
+            The model performs very well for house prices in the lower and mid-range price segments, 
+            as indicated by the data points closely aligned with the red line.  
+            However, for higher price ranges, the model seems to slightly underestimate prices, 
+            as seen in the test data where data points tend to fall below the red line.
+            """
+        )
+        regression_evaluation_plots(model=optimized_model, alpha_scatter=0.5)
 
 if __name__ == "__main__":
-    st.title("House Price Prediction Model Evaluation")
     model_performance_body()
