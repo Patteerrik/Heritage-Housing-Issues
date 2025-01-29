@@ -9,7 +9,7 @@ def feature_correlation_body():
 
     # Set the title and description for the page
     st.title("Feature Correlation with Sale Price")
-    st.write("This page presents the most important features correlated with the sale price of the houses.")
+    st.success("This page presents the most important features correlated with the sale price of the houses.")
 
     # Calculate the correlation with SalePrice
     correlation = df.corr()
@@ -60,7 +60,7 @@ def feature_correlation_body():
 
         st.info(
             "The analysis successfully addressed the client's requirement to understand how different house attributes correlate with sale prices. "
-            "We conducted a detailed correlation analysis to identify the most relevant features, visualized these correlations, and summarized the key insights."
+            "A detailed correlation analysis identified the most relevant features, visualized these correlations, and summarized the key insights."
         )
 
         st.success(
