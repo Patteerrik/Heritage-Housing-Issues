@@ -61,13 +61,30 @@ def predict_sale_price_body():
     This feature fulfills **Business Requirement 2**, which focuses on creating a machine learning model to predict house prices for inherited houses and other properties in Ames, Iowa.  
     The prediction is made using the **best features** identified during model training to ensure accuracy and reliability.
     """)
+    
+    st.info("""
+    #### **Why Feature Limits Are Applied**
+    - **Realistic Input Ranges:** The min and max values for each feature are set based on actual data distribution to ensure valid predictions.  
+    - **Avoiding Unrealistic Values:** This prevents users from entering values outside the range of houses in Ames, Iowa.  
+    - **Consistency with the Dataset:** The maximum year for **YearRemodAdd** is **2010**, matching the dataset's latest remodel year.  
+    - **Error Handling:** Input validation helps maintain stability and prevents crashes from incorrect values.  
 
+    These measures help keep predictions meaningful and aligned with the trained model.
+    """)
+
+    # --- Update Input Fields with Correct Limits ---
     input_data = {}
     for feature in best_features:
         if feature == 'OverallQual':
-            input_data[feature] = st.slider(f"{feature} (1 to 10)", 1, 10, 5)
+            input_data[feature] = st.slider(f"{feature} (1 to 10)", min_value=1, max_value=10, value=5)
         elif feature == 'YearRemodAdd':
-            input_data[feature] = st.number_input(f"{feature} (Year)", min_value=1900, max_value=2025, value=2000)
+            input_data[feature] = st.number_input(f"{feature} (Year)", min_value=1950, max_value=2010, value=2000)
+        elif feature == 'GarageArea':
+            input_data[feature] = st.number_input(f"{feature} (sq ft)", min_value=0, max_value=1418, value=500)
+        elif feature == 'GrLivArea':
+            input_data[feature] = st.number_input(f"{feature} (sq ft)", min_value=334, max_value=5642, value=1500)
+        elif feature == 'TotalBsmtSF':
+            input_data[feature] = st.number_input(f"{feature} (sq ft)", min_value=0, max_value=6110, value=1000)
         else:
             input_data[feature] = st.number_input(f"{feature} (Enter value)", min_value=1, value=100)
 
