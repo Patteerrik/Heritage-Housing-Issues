@@ -17,12 +17,12 @@ def model_performance_body():
 
     # ML Pipeline Overview
     st.info(
-        f"#### ML Pipeline Requirements:\n"
-        f"* The client requested an *R2* score of at least 0.75 on both training and test sets.\n"
-        f"* The model is trained and optimized using the Random Forest Regressor.\n"
-        f"**Evaluation Results:**\n"
-        f"* The training set achieved an R2 score of 0.961, which exceeds the required threshold.\n"
-        f"* The test set achieved an R2 score of 0.866, confirming the model's generalization is well within the agreed limits.\n"
+        "#### ML Pipeline Requirements:\n"
+        "- The client requested an *R2* score of at least 0.75 on both training and test sets.\n"
+        "- The model is trained and optimized using the Random Forest Regressor.\n\n"
+        "**Evaluation Results:**\n\n"
+        "- The training set achieved an R2 score of 0.961, which exceeds the required threshold.\n"
+        "- The test set achieved an R2 score of 0.866, confirming the model's generalization is well within the agreed limits."
     )
     
     st.write("#### ML Pipeline Steps")
@@ -48,6 +48,7 @@ def model_performance_body():
     # Feature Importance
     st.write("---")
     st.write("#### Feature Importance")
+    st.success("The best features")
     try:
         feature_importance = plt.imread(feature_importance_path)
         st.image(feature_importance, caption="Feature Importance", use_container_width =True)
