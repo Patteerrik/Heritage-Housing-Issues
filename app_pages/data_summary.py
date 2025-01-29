@@ -8,16 +8,17 @@ def data_summary_body():
     # Summary of the dataset used in the project
     st.info(
     "**Dataset Overview**\n"
-    "This project uses data from house sales in Ames, Iowa, containing information about "
-    "various features that potentially impact house prices. The selected features used in the prediction model "
-    "include 'GarageArea', 'GrLivArea', 'TotalBsmtSF', 'OverallQual', and 'YearRemodAdd', all of which "
-    "have a correlation greater than 0.5 with the sale price. These features reflect critical aspects such as "
-    "the overall quality of the house, the size of the living areas, and the age of recent remodels.\n\n"
-    "These features were chosen for their strong relationship with house prices, emphasizing the importance "
-    "of quality, space, and modern updates in the housing market. Other potential features, such as "
-    "first floor area or deck size, were not included as their correlations with sale prices are generally "
-    "lower and less impactful for this model."
-)
+    "This project analyzes house sales data from Ames, Iowa, focusing on key features that impact house prices. "
+    "The selected features for the prediction model are:\n"
+    "- **GarageArea** (Garage size)\n"
+    "- **GrLivArea** (Above-ground living area)\n"
+    "- **TotalBsmtSF** (Total basement size)\n"
+    "- **OverallQual** (Overall house quality, rated 1-10)\n"
+    "- **YearRemodAdd** (Year of last remodel)\n\n"
+    "These features were chosen based on their strong correlation (>0.5) with sale prices, highlighting the importance "
+    "of space, quality, and modern renovations. Features with weaker correlations"
+    "were excluded to maintain model accuracy and avoid unnecessary complexity."
+    )
 
 
     # Provide a link to the README for further project documentation
@@ -30,15 +31,19 @@ def data_summary_body():
     # Background and business requirements for the project
     st.success(
         "### Background Information\n"
-        "Lydia Doe has inherited four houses in Ames, Iowa from her great-grandfather. "
-        "While knowledgeable about property prices in Belgium, she's unsure about the Iowa market. "
-        "Lydia needs to accurately price these houses to maximize her returns and is also interested in "
-        "the general property market in Ames for potential future investments.\n\n"
+        "Lydia Doe has inherited **four houses in Ames, Iowa** from her great-grandfather. "
+        "Although she is experienced in the **Belgian** real estate market, she lacks knowledge about property values in Ames. "
+        "She wants to accurately price these properties for potential sale and explore future investment opportunities.\n\n"
         "### Business Requirements\n"
-        "1. **Understand Attribute Correlations**: The client wants to understand how different features "
-        "of the house affect its sale price. This will be demonstrated through visualizations of correlated variables.\n"
-        "2. **Predict House Prices**: The client also wants to use these insights to predict the sale prices of four specific houses they have inherited."
+        "**1. Understand Attribute Correlations**\n"
+        "- Lydia wants to understand how house features (size, quality, renovations) influence sale price.\n"
+        "- This will be visualized through **data analysis and correlation plots** to highlight key price drivers.\n\n"
+        "**2. Predict House Prices**\n"
+        "- A **machine learning model** is trained to predict house prices based on key features.\n"
+        "- The model will provide **sale price estimates** for Lydia’s four inherited houses.\n"
+        "- It can also predict prices for **any house in Ames**, allowing Lydia to explore potential investments."
     )
+
 
 
 
