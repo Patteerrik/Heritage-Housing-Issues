@@ -97,33 +97,47 @@ The scatter plots and correlation analysis show a positive relationship between 
 
 ## The rationale to map the business requirements to the Data Visualisations and ML tasks
 
-* **Business Requirement 1**
+### **Business Requirement 1**
 
-  * To understand how different house attributes relate to the sale price, a correlation study or Predictive Power Score (PPS) analysis will be performed.
-  * This will help identify the variables most significantly impacting the sale price.
-  * These variables will be visualized against the sale price to derive insights.
+**"The client is interested in discovering how the house attributes correlate with the sale price. Therefore, the client expects data visualisations of the correlated variables against the sale price to show that."**
 
-* **Business Requirement 2**
+  * To understand how different house attributes relate to the sale price, a correlation study based on Pearson correlation will be performed.
+  * This helps identify which variables have the greatest impact on the sale price.
+  * Scatter plots with a best-fit (regression) line will be used to clearly show the relationship between each variable and the house sale price.
 
-  * To predict the total sale price of the four inherited houses, a Machine Learning (ML) model will be created to map the relationships between house features and the sale price.
-  * Either traditional ML models or Neural Networks can be used.
-  * To enhance the model's performance, hyperparameter optimization will be conducted using tools like Scikit-Learn.
+### **Business Requirement 2**
+
+**"The client is interested in predicting the house sale price from her four inherited houses, and any other house in Ames, Iowa."**
+
+  * To predict the sale price of the four inherited houses (and other houses in Ames), a Machine Learning model will be developed to map house attributes to final prices.
+  * A traditional regression model (such as Random Forest or XGBoost) will be used for this task.
+  * To improve the model’s performance, hyperparameter tuning will be applied, using techniques like GridSearchCV in Scikit-Learn.
+
 
 ## ML Business Case
 
-The client wants to understand what affects house prices and predict the prices of specific houses, including four inherited houses. To achieve this, a machine learning model will be used.
+This section explains **why** and **how** we build a machine learning solution to predict house prices in Ames, Iowa.
 
-The ML task is to build a model that can predict house prices based on different features of the house, like the area, number of rooms, year built, etc. Since the price is a number, a regression model is a good choice.
+### 1. Data Source & Preparation
+- **Dataset**: A public Kaggle dataset containing ~1,500 records of houses in Ames, Iowa.  
+- **Preprocessing**: We clean missing data, check for outliers, and encode categorical variables. This provides a more reliable foundation for model training.
 
-Key Points for the ML Model:
-* **Inputs:** Information about the house, such as the number of rooms, lot size, garage area, and more.
-* **Output:** The predicted price of the house.
-* **Model Type:** A regression model, such as Random Forest, Linear Regression, or Neural Networks, will be used to find the relationship between house features and sale prices.
-* **Success Criteria:** The client considers the model successful if it has an R² score of at least 0.75. This means the model should be able to explain at least 75% of the changes in house prices.
-* **Use Cases:**
-  * Show how different house features are related to sale prices.
-  * Predict the sale prices of the four inherited houses and other houses in Ames, Iowa.
-The goal is to give the client a reliable tool to estimate house prices, helping them get the best value for their inherited houses and make good decisions for other properties.
+### 2. Modeling
+- **Regression Algorithms**: Since we aim to predict a continuous value (SalePrice), we will use regression methods such as Random Forest, Linear Regression.
+- **Hyperparameter Tuning**: We will optimize model parameters and assess performance on both the training and test sets.
+
+### 3. Success Criteria
+- **R2 ≥ 0.75**: The model is deemed successful if it achieves at least 0.75 R2 on both training and test data.
+- **Good Generalization**: The difference in R2 between training and test sets should be minimal to avoid overfitting.
+
+### 4. Use Cases
+- **Correlation Analysis**: Demonstrate how key features relate to sale price.
+- **Price Prediction**: Estimate sale prices for the four inherited houses and any other property in Ames, ensuring the client can set an optimal and profitable price.
+
+### 5. Outcome
+- **Dashboard**: A Streamlit app that lets users visualize feature correlations and generate price predictions.
+- **Client Benefit**: The client gains a reliable tool to price her inherited properties accurately and make informed decisions for future real estate opportunities.
+
 
 ## CRISP-DM
 
@@ -142,13 +156,54 @@ The goal is to give the client a reliable tool to estimate house prices, helping
 
 ## Dashboard Design
 
-1. **Summary Page:** Provides an overview of the dataset and states the business requirements.
-2. **Feature Correlation Page:** Lists findings related to features most correlated with sales price.
-3. **Inherited Houses Page:** Displays the four inherited houses and their respective predicted sale prices, including the summed sale price.
-4. **Hypotheses Page:** Describes the hypotheses and how they were validated.
-5. **Technical Page:** Shows the model's performance and pipeline steps.
+### 1. Summary Page
+Provides an overview of the dataset and outlines the business requirements:
+- **Dataset Overview:** Lists key features selected for model training based on their correlation with sale price.
+- **Business Requirements:**
+  1. Understanding how house features impact sale prices.
+  2. Predicting the sale price of inherited and other houses in Ames, Iowa.
+
+### 2. Feature Correlation Page
+Displays insights on how different house attributes correlate with the sale price:
+- **Key Findings:** Highlights the most relevant features (`OverallQual`, `GrLivArea`, `TotalBsmtSF`, `GarageArea`, `YearRemodAdd`) based on correlation strength.
+- **Visualizations:** Scatter plots and trend lines demonstrate relationships between these features and sale price.
+
+### 3. Predict House Price Page
+Allows users to predict house prices using the trained model:
+- **Inherited Properties:** Lists the client's four inherited houses with their predicted sale prices.
+- **New Property Prediction:** Users can input house features to get an estimated sale price.
+- **Feature Constraints:** Ensures user inputs stay within valid ranges based on dataset distribution.
+
+### 4. Hypotheses Validation Page
+Tests and validates hypotheses about factors affecting house prices:
+- **Hypothesis 1:** Larger houses tend to have higher sale prices.
+- **Hypothesis 2:** Higher quality homes sell for higher prices.
+- **Hypothesis 3:** Homes with larger garages have higher sale prices.
+- **Validation Process:** Correlation analysis and scatter plots confirm these hypotheses.
+
+### 5. ML Model Summary Page
+Provides details on the machine learning model and its performance:
+- **Chosen Model:** Optimized `RandomForestRegressor`.
+- **Performance Metrics:**
+  - **Training Set:** R² = 0.961
+  - **Test Set:** R² = 0.866
+- **Pipeline Steps:** Data preprocessing, feature selection, and hyperparameter optimization.
+- **Evaluation Metrics:** Includes `Mean Squared Error (MSE)`, `Root Mean Squared Error (RMSE)`, and `Mean Absolute Error (MAE)`.
+
 
 ## Unfixed Bugs
+
+There were no bugs found.
+
+## Testing
+
+### Manual testing
+
+
+
+### PEP8 testing
+
+All .py pages were tested with the [CI Python Linter](https://pep8ci.herokuapp.com/#) and passed without errors.
 
 
 ## Deployment
