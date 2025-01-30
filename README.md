@@ -160,8 +160,8 @@ This section explains **why** and **how** we build a machine learning solution t
 Provides an overview of the dataset and outlines the business requirements:
 - **Dataset Overview:** Lists key features selected for model training based on their correlation with sale price.
 - **Business Requirements:**
-  1. Understanding how house features impact sale prices.
-  2. Predicting the sale price of inherited and other houses in Ames, Iowa.
+  * Understanding how house features impact sale prices.
+  * Predicting the sale price of inherited and other houses in Ames, Iowa.
 
 ### 2. Feature Correlation Page
 Displays insights on how different house attributes correlate with the sale price:
@@ -185,8 +185,8 @@ Tests and validates hypotheses about factors affecting house prices:
 Provides details on the machine learning model and its performance:
 - **Chosen Model:** Optimized `RandomForestRegressor`.
 - **Performance Metrics:**
-  - **Training Set:** R² = 0.961
-  - **Test Set:** R² = 0.866
+  - **Training Set:** R2 = 0.961
+  - **Test Set:** R2 = 0.866
 - **Pipeline Steps:** Data preprocessing, feature selection, and hyperparameter optimization.
 - **Evaluation Metrics:** Includes `Mean Squared Error (MSE)`, `Root Mean Squared Error (RMSE)`, and `Mean Absolute Error (MAE)`.
 
@@ -233,7 +233,7 @@ All .py pages were tested with the [CI Python Linter](https://pep8ci.herokuapp.c
   * **RandomForestRegressor:** For predicting house prices based on the features provided.
   * **StandardScaler:** To scale numerical features before training the model.
   * **Pipeline:** To create a pipeline that standardizes the data and then applies the machine learning model.
-  * **Evaluation Metrics:** Metrics like Mean Squared Error (MSE) and R² were used to evaluate the model's performance.
+  * **Evaluation Metrics:** Metrics like Mean Squared Error (MSE) and R2 were used to evaluate the model's performance.
 
 ### Matplotlib and Seaborn
 * **Usage:** These libraries were used for data visualization.
