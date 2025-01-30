@@ -1,17 +1,23 @@
 # Heritage Housing Issues
 
-This project helps Lydia Doe, a fictional individual, sell four inherited houses in Ames, Iowa. Lydia knows property markets in Belgium but worries her knowledge won’t work for Ames. To avoid losing money, she asks for help from a Data Practitioner.
+This project helps Lydia Doe, a fictional individual, sell four inherited houses in Ames, Iowa. Lydia is familiar with real estate in Belgium but is uncertain about the market in Ames. To make informed decisions and maximize profits, she seeks data-driven insights.
 
 ## Goals
 
-1. **Analyze house data**  
-   Show how house features affect sale prices with clear visualizations.
-2. **Predict house prices**  
-   Build a model to estimate prices for Lydia’s houses and any house in Ames.
-3. **Create a dashboard**  
-   Provide an easy to use tool for exploring data and predicting house prices.
+### 1. Analyze House Data  
+- Identify key features that influence house prices.  
+- Use correlation analysis and visualizations to highlight the most important factors.  
 
-This project delivers data driven insights and accurate price predictions to help Lydia make the best decisions.
+### 2. Predict House Prices  
+- Train and optimize a Random Forest Regressor model with hyperparameter tuning.  
+- Estimate prices for Lydia’s inherited houses and any other house in Ames.  
+
+### 3. Create an Interactive Dashboard  
+- Provide an easy to use Streamlit application.  
+- Include feature correlation analysis, model predictions, and validation of hypotheses.  
+
+This project delivers data driven insights and reliable price predictions to help Lydia make the best decisions when selling her properties.
+
 
 
 
@@ -21,12 +27,33 @@ This project delivers data driven insights and accurate price predictions to hel
 - [Hypothesis and Validation](#hypothesis-and-validation)
 - [The Rationale to Map Business Requirements to Data Visualizations and ML Tasks](#the-rationale-to-map-business-requirements-to-data-visualizations-and-ml-tasks)
 - [ML Business Case](#ml-business-case)
+  - [Data Source & Preparation](#1-data-source--preparation)
+  - [Modeling](#2-modeling)
+  - [Success Criteria](#3-success-criteria)
+  - [Use Cases](#4-use-cases)
+  - [Outcome](#5-outcome)
+- [CRISP-DM](#crisp-dm)
+- [Epics and User Stories](#epics-and-user-stories)
 - [Dashboard Design](#dashboard-design)
+  - [Summary Page](#1-summary-page)
+  - [Feature Correlation Page](#2-feature-correlation-page)
+  - [Predict House Price Page](#3-predict-house-price-page)
+  - [Hypotheses Validation Page](#4-hypotheses-validation-page)
+  - [ML Model Summary Page](#5-ml-model-summary-page)
 - [Unfixed Bugs](#unfixed-bugs)
+- [Testing](#testing)
+  - [Manual Testing](#manual-testing)
+  - [PEP8 Testing](#pep8-testing)
 - [Deployment](#deployment)
   - [Heroku](#heroku)
 - [Main Data Analysis and Machine Learning Libraries](#main-data-analysis-and-machine-learning-libraries)
+  - [Pandas](#pandas)
+  - [NumPy](#numpy)
+  - [Scikit-learn](#scikit-learn)
+  - [Matplotlib and Seaborn](#matplotlib-and-seaborn)
+  - [Streamlit](#streamlit)
 - [Credits](#credits)
+
 
 
 ## Dataset Content
