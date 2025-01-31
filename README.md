@@ -244,7 +244,7 @@ To ensure a structured approach, the project is broken down into **five epics**,
   - **User Input Interface:** Allows users to enter new house attributes for price prediction.  
   - **Performance Metrics Section:** Provides insight into how well the model generalizes to new data.  
 - **Deployment:**  
-  - The dashboard was designed to be lightweight and user-friendly, making it suitable for deployment.
+  - The dashboard was designed to be lightweight and user friendly, making it suitable for deployment.
 ### **Epic 5:** Dashboard Deployment and Release
 The dashboard was deployed to **Heroku** using GitHub integration. The application is now publicly accessible for users to explore data insights and model predictions.
 
@@ -288,7 +288,7 @@ Provides details on the machine learning model and its performance:
 ## Unfixed Bugs
 
 There were no bugs found.
-View Pipeline Details
+
 ## Testing
 
 ### Manual testing
@@ -298,15 +298,15 @@ The functionality of the application was manually tested to ensure that all key 
 | **Feature**                         | **Test Description** | **Expected Result** | **Actual Result** | **Pass/Fail** |
 |--------------------------------------|----------------------|----------------------|--------------------|--------------|
 | **Navigation** | Click each navigation link | User is redirected to the correct page | Works as expected | ✅ Pass |
-| **Data Summary Page** | Check that dataset overview is displayed | Summary statistics are shown | Works as expected | ✅ Pass |
 | **Data Summary Page** | Check if readme link is working | User is directed to the correct readme page | Works as expected | ✅ Pass |
-| **Feature Correlation Page** | Click correlation plots | Visualizations appear correctly | Works as expected | ✅ Pass |
+| **Feature Correlation Page** | Click 'Show correlation plots' | Visualizations appear correctly | Works as expected | ✅ Pass |
+| **Predict House Price** | Click 'Predict Sale Price' | The model predicts sales price | Works as expected | ✅ Pass |
 | **Predict House Price** | Enter valid inputs & submit | Model predicts house price correctly | Works as expected | ✅ Pass |
 | **Predict House Price** | Enter extreme values | Input validation prevents errors | Works as expected | ✅ Pass |
 | **Hypotheses Validation Page** | Click to validate each hypothesis | Correct scatter plots and analysis appear | Works as expected | ✅ Pass |
-| **ML Model Summary Page** | Click View Pipeline Details | Pipeline Details are displayed | Works as expected | ✅ Pass |
-| **ML Model Summary Page** | Click View Performance Metrics | R2, MAE, MSE, RMSE values are displayed | Works as expected | ✅ Pass |
-| **ML Model Summary Page** | Click View Predicted vs Actual Scatterplots | Train and test set results are displayed | Works as expected | ✅ Pass |
+| **ML Model Summary Page** | Click 'View Pipeline Details' | Pipeline Details are displayed | Works as expected | ✅ Pass |
+| **ML Model Summary Page** | Click 'View Performance Metrics' | R2, MAE, MSE, RMSE values are displayed | Works as expected | ✅ Pass |
+| **ML Model Summary Page** | Click 'View Predicted vs Actual Scatterplots' | Train and test set results are displayed | Works as expected | ✅ Pass |
 
 ### PEP8 testing
 
