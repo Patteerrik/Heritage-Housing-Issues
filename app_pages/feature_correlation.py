@@ -14,7 +14,7 @@ def feature_correlation_body():
     )
 
     # Set the title and description for the page
-    st.title("Feature Correlation with Sale Price")
+    st.write("### Feature Correlation with Sale Price")
     st.success(
         "This page presents the most important features correlated with the "
         "sale price of the houses."

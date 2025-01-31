@@ -7,7 +7,7 @@ from src.evaluate import regression_evaluation_plots
 
 
 def model_performance_body():
-    st.write("#### ML Model Summary")
+    st.write("### ML Model Summary")
 
     # Define file paths
     version = "v1"

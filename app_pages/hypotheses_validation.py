@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 def hypotheses_validation_body():
-    st.title("Hypotheses Validation")
+    st.write("### Hypotheses Validation")
     st.write("This section presents the hypotheses tested in this project"
              " and how they were validated.")
 
