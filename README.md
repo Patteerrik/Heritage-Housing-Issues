@@ -1,6 +1,8 @@
 # Heritage Housing Issues
 
-This project helps Lydia Doe, a fictional individual, sell four inherited houses in Ames, Iowa. Lydia is familiar with real estate in Belgium but is uncertain about the market in Ames. To make informed decisions and maximize profits, she seeks data-driven insights.
+**Heritage Housing Issues** is a project designed to assist **Lydia Doe**, a fictional individual, in making informed decisions about selling four inherited houses in Ames, Iowa. Lydia, who has extensive real estate knowledge in Belgium, is unfamiliar with the Ames housing market. She realizes that what makes a property valuable in Belgium may not apply in Iowa, and mispricing could lead to significant financial losses.
+
+To maximize her profits and gain a deeper understanding of property valuation in Ames, Lydia seeks help from a Data Practitioner.
 
 ## Goals
 
@@ -18,32 +20,31 @@ This project helps Lydia Doe, a fictional individual, sell four inherited houses
 
 This project delivers data driven insights and reliable price predictions to help Lydia make the best decisions when selling her properties.
 
-
+The live link to the project dashboard is here: **[Heroku App Link](https://heritage-housingpp5-a255d2ccf934.herokuapp.com/)**
 
 
 ## Table of Contents
 - [Dataset Content](#dataset-content)
 - [Business Requirements](#business-requirements)
-- [Hypothesis and Validation](#hypothesis-and-validation)
+- [Hypothesis and validation](#hypothesis-and-validation)
 - [The Rationale to Map Business Requirements to Data Visualizations and ML Tasks](#the-rationale-to-map-business-requirements-to-data-visualizations-and-ml-tasks)
 - [ML Business Case](#ml-business-case)
-  - [Data Source & Preparation](#1-data-source--preparation)
-  - [Modeling](#2-modeling)
-  - [Success Criteria](#3-success-criteria)
-  - [Use Cases](#4-use-cases)
-  - [Outcome](#5-outcome)
-- [CRISP-DM](#crisp-dm)
+  - [Data Source & Preparation](#data-source--preparation)
+  - [Modeling](#modeling)
+  - [Success Criteria](#success-criteria)
+  - [Use Cases](#use-cases)
+  - [Outcome](#outcome)
 - [Epics and User Stories](#epics-and-user-stories)
 - [Dashboard Design](#dashboard-design)
-  - [Summary Page](#1-summary-page)
-  - [Feature Correlation Page](#2-feature-correlation-page)
-  - [Predict House Price Page](#3-predict-house-price-page)
-  - [Hypotheses Validation Page](#4-hypotheses-validation-page)
-  - [ML Model Summary Page](#5-ml-model-summary-page)
+  - [Summary Page](#summary-page)
+  - [Feature Correlation Page](#feature-correlation-page)
+  - [Predict House Price Page](#predict-house-price-page)
+  - [Hypotheses Validation Page](#hypotheses-validation-page)
+  - [ML Model Summary Page](#ml-model-summary-page)
 - [Unfixed Bugs](#unfixed-bugs)
-- [Testing](#testing)
+- [Code Quality & Testing](#code-quality--testing)
   - [Manual Testing](#manual-testing)
-  - [PEP8 Testing](#pep8-testing)
+  - [PEP8 Compliance](#pep8-compliance)
 - [Deployment](#deployment)
   - [Heroku](#heroku)
 - [Main Data Analysis and Machine Learning Libraries](#main-data-analysis-and-machine-learning-libraries)
@@ -53,6 +54,7 @@ This project delivers data driven insights and reliable price predictions to hel
   - [Matplotlib and Seaborn](#matplotlib-and-seaborn)
   - [Streamlit](#streamlit)
 - [Credits](#credits)
+
 
 
 
@@ -154,7 +156,7 @@ This section explains **why** and **how** we build a machine learning solution t
 - **Hyperparameter Tuning**: We will optimize model parameters and assess performance on both the training and test sets.
 
 ### 3. Success Criteria
-- **R2 ≥ 0.75**: The model is deemed successful if it achieves at least 0.75 R2 on both training and test data.
+- **R2 Score Requirement:** The model must achieve **≥ 0.75** on both training and test sets to be considered successful.  
 - **Good Generalization**: The difference in R2 between training and test sets should be minimal to avoid overfitting.
 
 ### 4. Use Cases
@@ -170,16 +172,81 @@ This section explains **why** and **how** we build a machine learning solution t
 
 ## Epics and User Stories
 
-* **Epic 1:** Information Gathering and Data Collection
-  - User Story: Collect relevant data and information for analysis.
-* **Epic 2:** Data Visualization, Cleaning, and Preparation
-  - User Story: Visualize the data, identify trends, and clean the dataset.
-* **Epic 3:** Model Training, Optimization, and Validation
-  - User Story: Train the model, tune hyperparameters, and validate model performance.
-* **Epic 4:** Planning, Design, and Development of Dashboard
-  - User Story: Design and develop an interactive dashboard to visualize insights.
-* **Epic 5:** Dashboard Deployment and Release
-  - User Story: Deploy the dashboard to Heroku and make it publicly accessible.
+To ensure a structured approach, the project is broken down into **five epics**, each covering a key phase of development. Each epic consists of user stories that describe specific tasks required to meet business objectives.
+
+### **Epic 1: Information Gathering and Data Collection**
+- **Data Source:** Downloaded housing dataset from [Kaggle](https://www.kaggle.com/datasets/codeinstitute/housing-prices-data).  
+- **Processing Steps:**  
+  - Adjusted working directory for correct file paths.  
+  - Downloaded and extracted dataset.  
+  - Loaded `house_prices_records.csv` (**1460 rows, 24 columns**) for inspection.  
+  - Verified `inherited_houses.csv` (**4 rows, 23 columns**) with no missing values.  
+  - Converted key numerical features to `float` for consistency.  
+- **Data Storage:**  
+  - Saved processed dataset as `outputs/datasets/collection/HousePricesRecords.csv`.  
+  - Saved inherited houses data as `outputs/datasets/collection/InheritedHouses.csv` for further use. 
+
+### **Epic 2: Data Visualization, Cleaning, and Preparation**
+- **Data Loading:** Loaded `HousePricesRecords.csv` for inspection.  
+- **Missing Values Handling:**  
+  - Categorical features filled with the most frequent category.  
+  - Numerical features filled with the median to avoid outlier influence.  
+  - Features with excessive missing values (`EnclosedPorch`, `WoodDeckSF`) were removed.  
+- **Outlier Analysis:**  
+  - Outliers in `LotArea`, `GrLivArea`, and `SalePrice` were identified but **not removed** to retain data integrity.  
+- **Data Standardization:**  
+  - Converted key numerical features to `float` for consistency.  
+  - Categorical features transformed to `category` format to optimize memory.  
+- **Pipeline Implementation:**  
+  - Used `DropFeatures`, `CategoricalImputer`, and `MeanMedianImputer` for systematic cleaning.  
+  - Ensured transformations were reproducible across datasets.  
+- **Visualization:**  
+  - Bar plots were created to highlight missing values.  
+  - Data trends were analyzed using seaborn and matplotlib.  
+- **Data Export:**  
+  - Cleaned dataset saved as `HousePricesCleaned.csv` for further analysis.
+
+
+### **Epic 3: Model Training, Optimization, and Validation**
+- **Model Selection & Training:**  
+  - Multiple models were evaluated, including `LinearRegression`, `RandomForestRegressor`, `GradientBoostingRegressor`, `XGBRegressor`, and `ExtraTreesRegressor`.  
+  - Models were compared based on **R2 score**, **Mean Absolute Error (MAE)**, and **Mean Squared Error (MSE)**.  
+- **Best Model Selection:**  
+  - `RandomForestRegressor` was chosen as the final model due to its strong generalization with an R2 score of **0.87** on the test set.  
+- **Hyperparameter Tuning:**  
+  - `GridSearchCV` was used to optimize the model by adjusting `max_depth`, `n_estimators`, `min_samples_split`, and `min_samples_leaf`.  
+  - The optimized model achieved an R2 score of **0.87**, surpassing the required threshold (**≥ 0.75**).  
+- **Model Validation:**  
+  - **Train Set:**  
+    - R2 Score: **0.961**  
+    - MAE: **$9,046.78**  
+    - RMSE: **$15,295.42**  
+  - **Test Set:**  
+    - R2 Score: **0.866**  
+    - MAE: **$19,696.78**  
+    - RMSE: **$30,635.80**  
+- **Visualizations & Final Evaluation:**  
+  - Scatter plots comparing **actual vs. predicted prices** confirmed that the model made accurate predictions.  
+  - Residual plots showed minor overfitting but within acceptable limits.  
+- **Final Decision:**  
+  - The **optimized `RandomForestRegressor`** was saved and is ready for deployment.  
+  - No further tuning is required, as the model meets all business requirements.
+### **Epic 4: Planning, Design, and Development of Dashboard**
+- **Framework & Technology:**  
+  - The dashboard was built using **Streamlit**, allowing for interactive visualizations and model predictions.  
+- **Dashboard Structure:**  
+  - Multi-page navigation for different functionalities:  
+    - **Data Exploration:** Visualizes key trends and distributions in the dataset.  
+    - **Machine Learning Predictions:** Enables users to input house features and receive predicted prices.  
+    - **Model Performance:** Displays metrics such as R2 score, MAE, and RMSE to evaluate model accuracy.  
+- **Key Features:**  
+  - **Dynamic Charts & Tables:** Seaborn and Matplotlib were used for data visualization.  
+  - **User Input Interface:** Allows users to enter new house attributes for price prediction.  
+  - **Performance Metrics Section:** Provides insight into how well the model generalizes to new data.  
+- **Deployment:**  
+  - The dashboard was designed to be lightweight and user-friendly, making it suitable for deployment.
+### **Epic 5:** Dashboard Deployment and Release
+The dashboard was deployed to **Heroku** using GitHub integration. The application is now publicly accessible for users to explore data insights and model predictions.
 
 ## Dashboard Design
 
@@ -221,17 +288,29 @@ Provides details on the machine learning model and its performance:
 ## Unfixed Bugs
 
 There were no bugs found.
-
+View Pipeline Details
 ## Testing
 
 ### Manual testing
 
+The functionality of the application was manually tested to ensure that all key features work correctly in the deployed version. The following tests were performed:  
 
+| **Feature**                         | **Test Description** | **Expected Result** | **Actual Result** | **Pass/Fail** |
+|--------------------------------------|----------------------|----------------------|--------------------|--------------|
+| **Navigation** | Click each navigation link | User is redirected to the correct page | Works as expected | ✅ Pass |
+| **Data Summary Page** | Check that dataset overview is displayed | Summary statistics are shown | Works as expected | ✅ Pass |
+| **Data Summary Page** | Check if readme link is working | User is directed to the correct readme page | Works as expected | ✅ Pass |
+| **Feature Correlation Page** | Click correlation plots | Visualizations appear correctly | Works as expected | ✅ Pass |
+| **Predict House Price** | Enter valid inputs & submit | Model predicts house price correctly | Works as expected | ✅ Pass |
+| **Predict House Price** | Enter extreme values | Input validation prevents errors | Works as expected | ✅ Pass |
+| **Hypotheses Validation Page** | Click to validate each hypothesis | Correct scatter plots and analysis appear | Works as expected | ✅ Pass |
+| **ML Model Summary Page** | Click View Pipeline Details | Pipeline Details are displayed | Works as expected | ✅ Pass |
+| **ML Model Summary Page** | Click View Performance Metrics | R2, MAE, MSE, RMSE values are displayed | Works as expected | ✅ Pass |
+| **ML Model Summary Page** | Click View Predicted vs Actual Scatterplots | Train and test set results are displayed | Works as expected | ✅ Pass |
 
 ### PEP8 testing
 
 All .py pages were tested with the [CI Python Linter](https://pep8ci.herokuapp.com/#) and passed without errors.
-
 
 ## Deployment
 
@@ -269,7 +348,5 @@ All .py pages were tested with the [CI Python Linter](https://pep8ci.herokuapp.c
 
 ### Streamlit
 * **Usage**: Developing the project dashboard, which will allow users to interact with the model and visualize the results.
-
-### Content
 
 ## Credits
