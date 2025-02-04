@@ -315,6 +315,7 @@ All .py pages were tested with the [CI Python Linter](https://pep8ci.herokuapp.c
 ## Deployment
 
 ### Heroku
+The deployed app can be found here: **[Heroku App Link](https://heritage-housingpp5-a255d2ccf934.herokuapp.com/)**
 
 * The project was deployed to Heroku using the following steps.
 
