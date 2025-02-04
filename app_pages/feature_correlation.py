@@ -16,9 +16,19 @@ def feature_correlation_body():
     # Set the title and description for the page
     st.write("### Feature Correlation with Sale Price")
     st.success(
-        "This page presents the most important features correlated with the "
-        "sale price of the houses."
+        "This page explores how different house features affect sale prices. "
+        "By looking at correlations, we can find the most important factors that influence house values. "
+        "This helps in making better decisions for price estimation and real estate investment."
+        "\n\n**1stFlrSF** (First Floor Square Feet) represents the total living area on the first floor of the house. "
+        "It has a stronger correlation with **SalePrice** than **YearRemodAdd**, but it is also highly correlated with "
+        "**TotalBsmtSF (0.82)**. Since these two features give similar information, keeping both does not improve the model. "
+        "Also, a feature importance analysis showed that **TotalBsmtSF** was more useful for predictions, "
+        "so **1stFlrSF** was removed."
+        "\n\nThe five best features for predicting house prices are: "
+        "**OverallQual, GrLivArea, TotalBsmtSF, GarageArea, and YearRemodAdd**."
     )
+
+
 
     # Calculate the correlation with SalePrice
     correlation = df.corr()
@@ -48,18 +58,30 @@ def feature_correlation_body():
     ax.set_title("Correlation with SalePrice", fontsize=16)
     st.pyplot(fig)
 
+    feature_descriptions = {
+        "OverallQual": "Rates the overall material and finish of the house (1 = Very Poor, 10 = Excellent).",
+        "GrLivArea": "Above ground (ground level) living area in square feet.",
+        "TotalBsmtSF": "Total square feet of basement area.",
+        "GarageArea": "Size of garage in square feet.",
+        "YearRemodAdd": "Year when house was remodeled."
+    }
+
+    st.subheader("Relationship Between Features and Sale Price")
+    st.success(
+        "**The scatterplots below show how different attributes affect the sale price.** "
+        "A clear upward trend means a strong positive correlation. "
+        "We expect features like **OverallQual** and **GrLivArea** to have a linear relationship."
+    )
+
     # Create a button to show/hide the plots
-    show_plots = st.checkbox("Show Correlation Plots", value=False)
+    show_plots = st.checkbox("Show Scatterplots for Top Features", value=False)
 
     if show_plots:
-        st.write("#### Visualizations")
-        top_features = correlation_with_saleprice.head(6).index
-
-        for feature in top_features:
+        for feature in top_6_features.index:
             if feature != "SalePrice":
+                st.write(f"**{feature}**: {feature_descriptions.get(feature, 'No description available')}")
+            
                 fig, ax = plt.subplots(figsize=(10, 6))
-
-                # Scatter plot for each feature against SalePrice
                 sns.scatterplot(
                     x=df[feature],
                     y=df["SalePrice"],
@@ -68,7 +90,7 @@ def feature_correlation_body():
                     s=80,
                 )
 
-                # Adding regression line
+                # Add regression line
                 sns.regplot(
                     x=df[feature],
                     y=df["SalePrice"],
@@ -129,4 +151,3 @@ def feature_correlation_body():
         "correlation means that as the feature value increases, "
         "the sale price also tends to increase."
     )
-
