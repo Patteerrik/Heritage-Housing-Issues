@@ -351,3 +351,34 @@ The deployed app can be found here: **[Heroku App Link](https://heritage-housing
 * **Usage**: Developing the project dashboard, which will allow users to interact with the model and visualize the results.
 
 ## Credits
+
+The following documentation was used for data preprocessing, model selection, hyperparameter tuning, and evaluation in:  
+- **FeatureEngineering.ipynb**  
+- **HouseSalePrices.ipynb**  
+- **Sales-price-prediction.ipynb**  
+
+#### **Model Selection & Hyperparameter Tuning**
+- [GradientBoostingRegressor documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html)  
+- [RandomForestRegressor documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html)  
+- [XGBRegressor documentation](https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBRegressor)  
+- [ExtraTreesRegressor documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesRegressor.html)  
+- [LinearRegression documentation](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)  
+- [GridSearchCV documentation (used for hyperparameter tuning)](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html)  
+- [Cross-validation documentation](https://scikit-learn.org/stable/modules/cross_validation.html)  
+
+#### **Model Evaluation & Residual Analysis**  
+- [Regression Metrics: R2, MAE, MSE, RMSE](https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics)  
+- [Understanding Residuals in Regression](https://medium.com/towards-data-science/how-to-use-residual-plots-for-regression-model-validation-c3c70e8ab378)  
+- [Permutation Importance documentation (used for feature importance analysis)](https://scikit-learn.org/stable/modules/permutation_importance.html)
+- [Feature importance evaluation](https://scikit-learn.org/stable/modules/ensemble.html#feature-importance-evaluation)
+- [Feature Importance with Random Forests (GeeksforGeeks)](https://www.geeksforgeeks.org/feature-importance-with-random-forests/?lang=en)
+
+#### **Visualization & Feature Importance**    
+- [Matplotlib documentation](https://matplotlib.org/stable/contents.html)  
+- [Seaborn documentation](https://seaborn.pydata.org/)  
+
+#### **Streamlit App Development**  
+- [Streamlit documentation](https://docs.streamlit.io/)
+- [CI Churnometer project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+DDA101+2021_T4/courseware/bba260bd5cc14e998b0d7e9b305d50ec/c83c55ea9f6c4e11969591e1b99c6c35/)
+  
+
