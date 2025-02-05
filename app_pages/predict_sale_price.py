@@ -123,18 +123,18 @@ def predict_sale_price_body():
             )
         elif feature == "GarageArea":
             input_data[feature] = st.number_input(
-                f"{feature} (sq ft)", min_value=0,
-                max_value=1418, value=500
+                f"{feature} (sq ft)", min_value=1,
+                max_value=3000, value=500
             )
         elif feature == "GrLivArea":
             input_data[feature] = st.number_input(
-                f"{feature} (sq ft)", min_value=334,
-                max_value=5642, value=1500
+                f"{feature} (sq ft)", min_value=50,
+                max_value=10000, value=1500
             )
         elif feature == "TotalBsmtSF":
             input_data[feature] = st.number_input(
-                f"{feature} (sq ft)", min_value=0,
-                max_value=6110, value=1000
+                f"{feature} (sq ft)", min_value=1,
+                max_value=8000, value=1000
             )
         else:
             input_data[feature] = st.number_input(
