@@ -352,10 +352,18 @@ The deployed app can be found here: **[Heroku App Link](https://heritage-housing
 
 ## Credits
 
-The following documentation was used for data preprocessing, model selection, hyperparameter tuning, and evaluation in:  
+The following documentation was used for data preprocessing, feature engineering, model selection, hyperparameter tuning, and evaluation in:  
+- **DataCleaning.ipynb**  
 - **FeatureEngineering.ipynb**  
 - **HouseSalePrices.ipynb**  
 - **Sales-price-prediction.ipynb**  
+
+#### **Data Preprocessing & Feature Engineering**  
+- [Feature-engine documentation](https://feature-engine.readthedocs.io/en/latest/)  
+- [DropFeatures documentation](https://feature-engine.trainindata.com/en/latest/user_guide/selection/DropFeatures.html)  
+- [CategoricalImputer documentation](https://feature-engine.trainindata.com/en/latest/api_doc/imputation/CategoricalImputer.html)  
+- [MeanMedianImputer documentation](https://feature-engine.trainindata.com/en/latest/api_doc/imputation/MeanMedianImputer.html)  
+- [ArbitraryNumberImputer documentation](https://feature-engine.trainindata.com/en/latest/api_doc/imputation/ArbitraryNumberImputer.html)   
 
 #### **Model Selection & Hyperparameter Tuning**
 - [GradientBoostingRegressor documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html)  
@@ -379,6 +387,11 @@ The following documentation was used for data preprocessing, model selection, hy
 
 #### **Streamlit App Development**  
 - [Streamlit documentation](https://docs.streamlit.io/)
+- [Streamlit Layouts and Containers](https://docs.streamlit.io/develop/api-reference/layout)
 - [CI Churnometer project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+DDA101+2021_T4/courseware/bba260bd5cc14e998b0d7e9b305d50ec/c83c55ea9f6c4e11969591e1b99c6c35/)
   
 
+## Inspiration
+
+The Streamlit structure in this project was inspired by:  
+- [faridjos/milestone-project-heritage-housing-issues](https://github.com/faridjos/milestone-project-heritage-housing-issues?tab=readme-ov-file#project-hypothesis-and-validation)
