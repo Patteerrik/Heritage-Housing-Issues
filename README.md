@@ -26,7 +26,7 @@ The live link to the project dashboard is here: **[Heroku App Link](https://heri
 ## Table of Contents
 - [Dataset Content](#dataset-content)
 - [Business Requirements](#business-requirements)
-- [Hypothesis and validation](#hypothesis-and-validation)
+- [Hypothesis and Validation](#hypothesis-and-validation)
 - [The Rationale to Map Business Requirements to Data Visualizations and ML Tasks](#the-rationale-to-map-business-requirements-to-data-visualizations-and-ml-tasks)
 - [ML Business Case](#ml-business-case)
   - [Data Source & Preparation](#data-source--preparation)
@@ -34,6 +34,7 @@ The live link to the project dashboard is here: **[Heroku App Link](https://heri
   - [Success Criteria](#success-criteria)
   - [Use Cases](#use-cases)
   - [Outcome](#outcome)
+- [CRISP-DM](#crisp-dm)
 - [Epics and User Stories](#epics-and-user-stories)
 - [Dashboard Design](#dashboard-design)
   - [Summary Page](#summary-page)
@@ -42,11 +43,11 @@ The live link to the project dashboard is here: **[Heroku App Link](https://heri
   - [Hypotheses Validation Page](#hypotheses-validation-page)
   - [ML Model Summary Page](#ml-model-summary-page)
 - [Unfixed Bugs](#unfixed-bugs)
-- [Code Quality & Testing](#code-quality--testing)
+- [Testing](#testing)
   - [Manual Testing](#manual-testing)
   - [PEP8 Compliance](#pep8-compliance)
 - [Deployment](#deployment)
-  - [Heroku](#heroku)
+  - [Heroku Deployment](#heroku-deployment)
 - [Main Data Analysis and Machine Learning Libraries](#main-data-analysis-and-machine-learning-libraries)
   - [Pandas](#pandas)
   - [NumPy](#numpy)
@@ -54,9 +55,6 @@ The live link to the project dashboard is here: **[Heroku App Link](https://heri
   - [Matplotlib and Seaborn](#matplotlib-and-seaborn)
   - [Streamlit](#streamlit)
 - [Credits](#credits)
-
-
-
 
 ## Dataset Content
 
@@ -335,12 +333,7 @@ The deployed app can be found here: **[Heroku App Link](https://heritage-housing
 * **Usage:** NumPy was used to handle numerical operations efficiently, such as converting data types and performing operations on arrays.
 
 ### Scikit-learn
-* **Usage:** This library was essential for building and evaluating the machine learning model.
-  * **Train-Test Split:** To split dataset into training and testing sets.
-  * **RandomForestRegressor:** For predicting house prices based on the features provided.
-  * **StandardScaler:** To scale numerical features before training the model.
-  * **Pipeline:** To create a pipeline that standardizes the data and then applies the machine learning model.
-  * **Evaluation Metrics:** Metrics like Mean Squared Error (MSE) and R2 were used to evaluate the model's performance.
+* **Usage:** Used for preparing data, training models, improving performance, and evaluating results. It helps with scaling features, automating workflows, finding the best model settings, and measuring accuracy to make better house price predictions.
 
 ### Matplotlib and Seaborn
 * **Usage:** These libraries were used for data visualization.
@@ -389,9 +382,6 @@ The following documentation was used for data preprocessing, feature engineering
 - [Streamlit documentation](https://docs.streamlit.io/)
 - [Streamlit Layouts and Containers](https://docs.streamlit.io/develop/api-reference/layout)
 - [CI Churnometer project](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+DDA101+2021_T4/courseware/bba260bd5cc14e998b0d7e9b305d50ec/c83c55ea9f6c4e11969591e1b99c6c35/)
-  
-
-## Inspiration
 
 The Streamlit structure in this project was inspired by:  
 - [faridjos/milestone-project-heritage-housing-issues](https://github.com/faridjos/milestone-project-heritage-housing-issues?tab=readme-ov-file#project-hypothesis-and-validation)
