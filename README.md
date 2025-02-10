@@ -217,11 +217,13 @@ To ensure a structured approach, the project is broken down into **five epics**,
 - **Model Validation:**  
   - **Train Set:**  
     - R2 Score: **0.961**  
-    - MAE: **$9,046.78**  
+    - MAE: **$9,046.78**
+    - MSE: **233,949,877.49** 
     - RMSE: **$15,295.42**  
   - **Test Set:**  
     - R2 Score: **0.866**  
-    - MAE: **$19,696.78**  
+    - MAE: **$19,696.78**
+    - MSE: **938,552,268.64**  
     - RMSE: **$30,635.80**  
 - **Visualizations & Final Evaluation:**  
   - Scatter plots comparing **actual vs. predicted prices** confirmed that the model made accurate predictions.  
@@ -236,7 +238,7 @@ To ensure a structured approach, the project is broken down into **five epics**,
   - Multi-page navigation for different functionalities:  
     - **Data Exploration:** Visualizes key trends and distributions in the dataset.  
     - **Machine Learning Predictions:** Enables users to input house features and receive predicted prices.  
-    - **Model Performance:** Displays metrics such as R2 score, MAE, and RMSE to evaluate model accuracy.  
+    - **Model Performance:** Displays metrics such as R2 score, MAE, MSE and RMSE to evaluate model accuracy.  
 - **Key Features:**  
   - **Dynamic Charts & Tables:** Seaborn and Matplotlib were used for data visualization.  
   - **User Input Interface:** Allows users to enter new house attributes for price prediction.  
@@ -273,15 +275,23 @@ Tests and validates hypotheses about factors affecting house prices:
 - **Hypothesis 3:** Homes with larger garages have higher sale prices.
 - **Validation Process:** Correlation analysis and scatter plots confirm these hypotheses.
 
-### 5. ML Model Summary Page
-Provides details on the machine learning model and its performance:
-- **Chosen Model:** Optimized `RandomForestRegressor`.
-- **Performance Metrics:**
-  - **Training Set:** R2 = 0.961
-  - **Test Set:** R2 = 0.866
-- **Pipeline Steps:** Data preprocessing, feature selection, and hyperparameter optimization.
-- **Evaluation Metrics:** Includes `Mean Squared Error (MSE)`, `Root Mean Squared Error (RMSE)`, and `Mean Absolute Error (MAE)`.
+### 5. ML Model Summary Page  
+Provides details on the machine learning model and its performance:  
 
+- **Chosen Model:** Optimized `RandomForestRegressor`.  
+- **Performance Metrics:**  
+  - **Training Set:**  
+    - **R² Score:** 0.961  
+    - **MSE:** 233,949,877.49  
+    - **RMSE:** 15,295.42  
+    - **MAE:** $9,046.78  
+  - **Test Set:**  
+    - **R² Score:** 0.866  
+    - **MSE:** 938,552,268.64  
+    - **RMSE:** 30,635.80  
+    - **MAE:** $19,696.78  
+- **Pipeline Steps:** Data preprocessing, feature selection, and hyperparameter optimization.  
+- **Evaluation Metrics:** Includes `Mean Squared Error (MSE)`, `Root Mean Squared Error (RMSE)`, and `Mean Absolute Error (MAE)`.  
 
 ## Unfixed Bugs
 
@@ -388,4 +398,4 @@ The Streamlit structure in this project was inspired by:
 
 #### Acknowledgements
 - Thanks to my mentor **Precious Ijege** for valuable insights.
-- A huge thank you to all the helpful people on **Slack**, especially the **Code Institute community**, for their feedback, and guidance throughout this project. They have been invaluable!
+- A huge thank you to all the helpful people on **Slack**, especially the **Code Institute community**, for their feedback, and help throughout this project.
