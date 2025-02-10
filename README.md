@@ -387,4 +387,5 @@ The Streamlit structure in this project was inspired by:
 - [faridjos/milestone-project-heritage-housing-issues](https://github.com/faridjos/milestone-project-heritage-housing-issues?tab=readme-ov-file#project-hypothesis-and-validation)
 
 #### Acknowledgements
-A huge thank you to all the helpful people on **Slack**, especially the **Code Institute community**, for their feedback, and guidance throughout this project. They have been invaluable!
+- Thanks to my mentor **Precious Ijege** for valuable insights.
+- A huge thank you to all the helpful people on **Slack**, especially the **Code Institute community**, for their feedback, and guidance throughout this project. They have been invaluable!
