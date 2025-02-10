@@ -204,7 +204,6 @@ To ensure a structured approach, the project is broken down into **five epics**,
 - **Data Export:**  
   - Cleaned dataset saved as `HousePricesCleaned.csv` for further analysis.
 
-
 ### **Epic 3: Model Training, Optimization, and Validation**
 - **Model Selection & Training:**  
   - Multiple models were evaluated, including `LinearRegression`, `RandomForestRegressor`, `GradientBoostingRegressor`, `XGBRegressor`, and `ExtraTreesRegressor`.  
@@ -231,6 +230,7 @@ To ensure a structured approach, the project is broken down into **five epics**,
 - **Final Decision:**  
   - The **optimized `RandomForestRegressor`** was saved and is ready for deployment.  
   - No further tuning is required, as the model meets all business requirements.
+
 ### **Epic 4: Planning, Design, and Development of Dashboard**
 - **Framework & Technology:**  
   - The dashboard was built using **Streamlit**, allowing for interactive visualizations and model predictions.  
@@ -245,7 +245,14 @@ To ensure a structured approach, the project is broken down into **five epics**,
   - **Performance Metrics Section:** Provides insight into how well the model generalizes to new data.  
 - **Deployment:**  
   - The dashboard was designed to be lightweight and user friendly, making it suitable for deployment.
-### **Epic 5:** Dashboard Deployment and Release
+
+### **Epic 5:** 
+- **AC1:** All features are tested.
+- **AC2:** Any issues found are documented and fixed.
+- **AC3:** Test results are added to the README file.
+See [Manual Testing](#manual-testing) for details.
+
+### **Epic 6:** Dashboard Deployment and Release
 The dashboard was deployed to **Heroku** using GitHub integration. The application is now publicly accessible for users to explore data insights and model predictions.
 
 ## Dashboard Design
