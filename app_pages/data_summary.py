@@ -55,4 +55,3 @@ def data_summary_body():
         "- It can also predict prices for **any house in Ames**, "
         "allowing her to explore potential investments."
     )
-
