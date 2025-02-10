@@ -8,7 +8,7 @@ class MultiPage:
 
         st.set_page_config(
             page_title=self.app_name,
-            page_icon="📊"  # You can change the icon
+            page_icon="📊"
         )
 
     def add_page(self, title, func):
