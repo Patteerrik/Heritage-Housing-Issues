@@ -20,7 +20,9 @@ To maximize her profits and gain a deeper understanding of property valuation in
 
 This project delivers data driven insights and reliable price predictions to help Lydia make the best decisions when selling her properties.
 
-The live link to the project dashboard is here: **[Heroku App Link](https://heritage-housingpp5-a255d2ccf934.herokuapp.com/)**
+The live application can be found here:
+
+**[Live Demo](https://heritage-housingpp5-a255d2ccf934.herokuapp.com/)**
 
 
 ## Table of Contents
